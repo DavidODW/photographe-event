@@ -1,6 +1,6 @@
 * {
     width: 1440px;
-    background-color: black;
+
   }
   
 .header {
@@ -18,4 +18,31 @@
  
       }
     }
+
+
+
+/* Style du menu principal */
+.nav__menu__wrapper {
+    .nav__menu {
+        display:flex;
+        flex-direction: row;
+        row-gap: 1em;
+        justify-content: flex-end;
+        li {
+            width: fit-content;
+            display: inline-block;
+            list-style: none;
+            a {
+                text-decoration: none;
+                color: #000000; 
+                padding: 10px 15px;
+
+                &:hover {
+                    background-color: #555;
+                }
+            }
+        }
+    }
+}
+
   }
