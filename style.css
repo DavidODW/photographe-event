@@ -1,9 +1,17 @@
-/*
-Theme Name:photographe-event
-Theme URI:https://motaphoto.com
-Author:Peyron David
-Author URI:http://photographe-event.local/
-Description:Mon premier thème !
-Requires at least:WordPress 5.0
-Version:1.0
-*/
+* {
+    width: 1440px;
+  }
+  
+  .header {
+    display: flex;
+    width: 100%;
+    height: 80px;
+  }
+  .header .header__logo {
+    padding-top: 31px;
+    padding-left: 146px;
+  }
+  .header .header__logo img {
+    width: 216px;
+    height: 14px;
+  }/*# sourceMappingURL=theme.css.map */
