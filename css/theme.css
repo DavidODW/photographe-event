@@ -1,1 +1,18 @@
-/*# sourceMappingURL=theme.css.map */
+* {
+  width: 1440px;
+  background-color: black !important;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  height: 80px;
+}
+.header .header__logo {
+  padding-top: 31px;
+  padding-left: 146px;
+}
+.header .header__logo img {
+  width: 216px;
+  height: 14px;
+}/*# sourceMappingURL=theme.css.map */
