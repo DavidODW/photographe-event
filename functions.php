@@ -15,6 +15,7 @@ function theme_setup() {
 
     register_nav_menus(array(
         'main-menu' => 'Menu Principal',
+        'footer-menu' => 'Menu pied de page'
     ));
 }
 add_action('after_setup_theme', 'theme_setup');
