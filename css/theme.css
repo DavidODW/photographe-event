@@ -212,12 +212,6 @@ p {
     transition: 0.3s;
     color: #ffffff;
   }
-  .overlay .overlay-content .nav__menu__wrapper ul li:hover {
-    background-color: #ffffff;
-  }
-  .overlay .overlay-content .nav__menu__wrapper ul li:hover a {
-    color: #000000 !important;
-  }
 }
 /* Style du menu du footer */
 .menu-menu-pied-de-page-container {

@@ -170,7 +170,7 @@ p{
               animation: nav__button__hover  0.5s ease-in-out;
               a{
                 background-color: $color-red-main;                  
-                color: $color-white-main;
+                color: $color-white-main; 
               }
             
           }  
@@ -235,12 +235,6 @@ p{
               display: block;
               transition: 0.3s;
               color: $color-white-main;
-            }
-            &:hover{
-              background-color: $color-white-main;             
-              a{
-                color: $color-black-main !important;
-              }
             }
           }
         }
