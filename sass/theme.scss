@@ -1,5 +1,23 @@
+/***********************************************colors**************************************************************/
+$color-red-main:#E00000;
+$color-red-primary:#FE5858;
+$color-red-secondary:#FFD6D6;
 
-/***********************************************declaration font**************************************************************/
+$color-black-main:#000000;
+$color-black-primary:#313144;
+$color-black-secondary:#C4C4C4;
+
+$color-white-main:#ffffff;
+$color-white-primary:#D8D8D8;
+$color-white-secondary:#E5E5E5;
+
+/***********************************************breakpoints**************************************************************/
+$breakpoint__small_tablet: 920px;
+$breakpoint__large_phone: 700px;
+$breakpoint__small_phone: 375px;
+
+/***********************************************fonts**************************************************************/
+/* space-mono - latin */
 @font-face {
   font-display: swap; 
   font-family: 'SpaceMono';
@@ -31,9 +49,6 @@
   font-weight: 700;
   src: url('../fonts/space-mono-v13-latin-700italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-
-
-
 /* poppins-300 - latin */
 @font-face {
   font-display: swap; 
@@ -53,10 +68,54 @@
 
 
 * {
-    width: 1440px;
     margin: 0 auto
 
+}
+h1 {
+  font-family:SpaceMono ;
+  font-size: 6em;
+  font-weight: 700;
+  font-style: italic;
+  color: $color-black-main;
+  @media screen and (max-height: $breakpoint__large_phone) {
+    font-size: 1.724em;
   }
+}
+
+h2 {
+  font-family:SpaceMono ;
+  font-size: 4.125em;
+  font-weight: 400;
+  font-style: italic;
+  color: $color-black-main;
+  @media screen and (max-height: $breakpoint__large_phone) {
+    font-size: 2.875em;
+  }
+}
+
+h3 {
+  font-family:SpaceMono ;
+  font-size: 1.125em;
+  font-weight: 400;
+  color: $color-black-main;
+  @media screen and (max-height: $breakpoint__large_phone) {
+    font-size: 1.666em;
+  }
+}
+
+p{
+  font-family:Poppins ;
+  font-size: 0.875em;
+  font-weight: 300;
+  color: $color-black-main;
+}
+
+.photo__text__description{
+  font-family:SpaceMono ;
+  font-size: 0.875em;
+  font-weight: 400;
+  color: $color-black-main;
+}
   
 .header {
     display: flex;
@@ -66,6 +125,14 @@
     .header__logo {
         padding-top: 31px;
         padding-left: 146px;
+        @media screen and (max-width:$breakpoint__large_phone) {
+          padding-left: 73px;
+          
+        }
+        @media screen and (max-width:$breakpoint__small_phone) {
+          padding-left: 10px;
+          
+        }
       img {
         width: 216px;
         height: 14px;
@@ -80,34 +147,111 @@
 .nav__menu__wrapper {
     .nav__menu {
         padding-top: 31px;
-        width: 60% ;
+        width: 100% ;
         display:flex;
         flex-direction: row;
         row-gap: 1em;
         justify-content: flex-end;
-        li {
-          
+        li {         
             width: fit-content;
             display: inline-block;
             list-style: none;
-
+            
             a {
                 text-decoration: none;
-                color: #000000; 
+                color: $color-black-main; 
                 padding: 10px 15px;
                 font-family:SpaceMono ;
                 font-size: 1em;
-                font-weight: 400;
-
-                &:hover {
-                    background-color: #555;
-                }
+                font-weight: 400;             
             }
+            &:hover {
+              border-radius: 20px;             
+              animation: nav__button__hover  0.5s ease-in-out;
+              a{
+                background-color: $color-red-main;                  
+                color: $color-white-main;
+              }
+            
+          }  
         }
+      }
+
     }
+
 }
 
+/* Style du menu du burger */
+@media screen and (min-width:$breakpoint__large_phone) {
+.burger__btn{
+  display: none;
+
+}
+.close__burger__btn{
+  display: none;
+}
+}
+@media screen and (max-width:$breakpoint__large_phone) {
+  .burger__btn{
+    width: 27.42px;
+    padding-top: 25px;
+  
   }
+  .close__burger__btn{
+    font-size: 2em;
+    font-weight: 700;
+    text-decoration: none;
+    color: $color-black-main; 
+  
+  }
+  .overlay {
+    height:0%;
+    width: 100%;
+    overflow-x: hidden;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 110px;
+    background-color: $color-red-main;
+    overflow-x: hidden;
+    transition: 1s;
+    opacity: 0;
+    .overlay-content {
+      position: relative;
+      top: 20%; 
+      width: 100%; 
+      text-align: center;
+      margin-top: 30px; 
+      .nav__menu__wrapper{
+        ul{
+          display: flex;
+          flex-direction: column;
+          font-size: 64px;
+          li{
+            a{
+              padding: 8px;
+              text-decoration: none;
+              font-size: 1em;
+              display: block;
+              transition: 0.3s;
+              color: $color-white-main;
+            }
+            &:hover{
+              background-color: $color-white-main;             
+              a{
+                color: $color-black-main !important;
+              }
+            }
+          }
+        }
+      }
+    }  
+  }
+}
+
+
+
+
 /* Style du menu du footer */
 .menu-menu-pied-de-page-container{
     display: flex;
@@ -119,18 +263,49 @@
       flex-direction: row;
       row-gap: 1em;
       justify-content:space-between;
+      padding-top: 16px;
+      row-gap: 1em;
+      li {         
+        display: inline-block;
+        list-style: none;
       a {
+        width: fit-content;
         text-decoration: none;
-        color: #000000; 
-        padding: 10px 15px;
+        color: $color-black-main; 
         font-family:SpaceMono ;
         font-size: 1em;
         font-weight: 400;
-
         &:hover {
-            background-color: #555;
+          color: $color-white-primary;
         }
       }
-      
+      p{
+        width: fit-content;
+        text-decoration: none;
+        color: $color-black-main; 
+        font-family:SpaceMono ;
+        font-size: 1em;
+        font-weight: 400;    
+      }
     }
+    }
+    @media screen and (max-width:$breakpoint__large_phone) {
+      .footer-menu {
+        width: 100%;
+        flex-direction: column;
+      }
+    }
+}
+
+/***********************************************animation**************************************************************/
+@keyframes nav__button__hover {
+  0% {
+    transform: scale(1); 
+  }
+  50% {
+    transform: scale(1.2); 
+  }
+  100% {
+    transform: scale(1); 
+  }
 }
