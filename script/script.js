@@ -20,4 +20,5 @@ document.addEventListener('DOMContentLoaded', function() {
     jQuery(".burger-link, .burger__btn").on("click", function() {
         toggleNav();
     });
+
 });

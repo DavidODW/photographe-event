@@ -11,6 +11,8 @@ $color-white-main:#ffffff;
 $color-white-primary:#D8D8D8;
 $color-white-secondary:#E5E5E5;
 
+$color-contact-field:#B8BBC2;
+
 /***********************************************breakpoints**************************************************************/
 $breakpoint__small_tablet: 920px;
 $breakpoint__large_phone: 700px;
@@ -71,6 +73,7 @@ $breakpoint__small_phone: 375px;
     margin: 0 auto
 
 }
+
 h1 {
   font-family:SpaceMono ;
   font-size: 6em;
@@ -103,6 +106,12 @@ h3 {
   }
 }
 
+.modal__form__text {
+  font-family:Poppins ;
+  font-size: 0.75em;
+  font-weight: 500;
+  color: $color-black-main;
+}
 p{
   font-family:Poppins ;
   font-size: 0.875em;
@@ -291,6 +300,78 @@ p{
     }
 }
 
+/***********************************************css modale**************************************************************/
+.modal {
+  display: none; 
+  z-index: 1; 
+  margin: auto;
+  width: 597px; 
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $color-white-main; 
+  animation: fallIn 0.5s ease-out;
+  &.fade-out {
+    animation: riseUp 0.5s ease-in;
+  }
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: $color-white-main;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 5px solid $color-black-main;
+  width: 597px; 
+  height: 769px;
+  overflow: hidden;
+  position: relative;
+  .modal__header{
+    position: relative;
+    left: -50px;
+    width: 885.96px;
+    height: 106.05px;
+  }
+  .modal_form_wrapper{
+    width: 263px;
+    flex-direction: column;
+    padding-right: 2em;
+    padding-top: 2em;
+    .modal__form__text {
+      font-family:Poppins ;
+      font-size: 0.75em;
+      font-weight: 600 !important;
+      color: $color-black-main;
+      padding-bottom: 0.32em;
+      padding-top: 1.5em;
+    }
+    .modal__user__field{
+      border-radius: 10px;
+      border: 1px solid $color-contact-field;
+      width: 263px;
+      height: 40px;
+     
+    }
+    #modal__user__message{
+      height: 210px;
+      
+    }
+    #modal__user__button{
+      width: 263px;
+      height: 50px;
+      border: 0px;
+      align-self: center;
+      margin-top: 2em;
+      background-color: $color-white-primary;
+      &:hover{
+        background-color: $color-white-secondary;
+      }
+    }
+  }
+}
+
+
 /***********************************************animation**************************************************************/
 @keyframes nav__button__hover {
   0% {
@@ -303,3 +384,33 @@ p{
     transform: scale(1); 
   }
 }
+
+@keyframes fallIn {
+ 0% {
+      top: -100%;
+      opacity: 0;
+  }
+  50%{
+    top: 25%;
+    opacity: 0.5;
+  }
+  100% {
+      top: 50%;
+      opacity: 1;
+  }
+}
+
+@keyframes riseUp {
+  0% {
+       top: 50%;
+       opacity: 1;
+   }
+   50%{
+     top: 25%;
+     opacity: 0.5;
+   }
+   100% {
+       top: -100%;
+       opacity: 0;
+   }
+ }
