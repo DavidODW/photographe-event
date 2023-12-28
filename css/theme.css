@@ -53,6 +53,11 @@
   margin: 0 auto;
 }
 
+body {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
 h1 {
   font-family: SpaceMono;
   font-size: 6em;
@@ -116,25 +121,22 @@ p {
   display: flex;
   width: 100%;
   height: 80px;
+  justify-content: space-between;
   /* Style du menu principal */
+}
+@media screen and (max-width: 700px) {
+  .header {
+    justify-content: space-evenly;
+  }
 }
 .header .header__logo {
   padding-top: 31px;
-  padding-left: 146px;
-}
-@media screen and (max-width: 700px) {
-  .header .header__logo {
-    padding-left: 73px;
-  }
-}
-@media screen and (max-width: 375px) {
-  .header .header__logo {
-    padding-left: 10px;
-  }
+  margin: 0;
 }
 .header .header__logo img {
   width: 216px;
   height: 14px;
+  padding-left: 6em;
 }
 .header .nav__menu__wrapper .nav__menu {
   padding-top: 31px;
@@ -142,7 +144,6 @@ p {
   display: flex;
   flex-direction: row;
   row-gap: 1em;
-  justify-content: flex-end;
 }
 .header .nav__menu__wrapper .nav__menu li {
   width: fit-content;
@@ -276,10 +277,10 @@ p {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  animation: fallIn 0.5s ease-out;
+  animation: fallIn 1s ease-out;
 }
 .modal.fade-out {
-  animation: riseUp 0.5s ease-in;
+  animation: riseUp 1s ease-in;
 }
 @media screen and (max-width: 700px) {
   .modal {
@@ -342,7 +343,7 @@ p {
   border-radius: 10px;
   border: 1px solid #B8BBC2;
   width: 100%;
-  height: 40px;
+  height: 35px;
 }
 .modal-content .modal_form_wrapper #modal__user__message {
   height: 210px;
@@ -402,7 +403,6 @@ p {
   }
   50% {
     top: 25%;
-    opacity: 0.5;
   }
   100% {
     top: -100%;
