@@ -386,8 +386,39 @@ p{
     }
   }
 }
+/**********************************************article:photo**************************************************************/
+.post {
+  &__section {
+    &.post__header {
+      display: flex;
 
+      &__meta,
+      &__img {
+        width: 50%;
+        box-sizing: border-box;
+        float: left;
+      }
 
+      &__meta {
+        padding: 0 20px; 
+      }
+
+      &__img {
+        width: 50%;
+        box-sizing: border-box;
+   
+        img {
+          width: 50%;
+          height: auto;
+          display: block;
+          object-fit: contain;
+          
+          
+        }
+      }
+    }
+  }
+}
 /***********************************************animation**************************************************************/
 @keyframes nav__button__hover {
   0% {

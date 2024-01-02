@@ -31,5 +31,13 @@ function tout_droit_reserve($items, $args) {
 
 add_filter('wp_nav_menu_items', 'tout_droit_reserve', 10, 2);
 
+// Récupération de la valeur du champ reference des post image pour les convertir en variable jquery
+function post_modal_reference() {
+    $post_meta_reference = get_field('reference');
+    wp_localize_script('jquery', 'custom_vars', array('post_meta_reference' => $post_meta_reference));
+}
+
+add_action('wp_enqueue_scripts', 'post_modal_reference');
+
 
 ?>

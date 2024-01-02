@@ -369,6 +369,29 @@ p {
   }
 }
 
+/**********************************************article:photo**************************************************************/
+.post__section.post__header {
+  display: flex;
+}
+.post__section.post__header__meta, .post__section.post__header__img {
+  width: 50%;
+  box-sizing: border-box;
+  float: left;
+}
+.post__section.post__header__meta {
+  padding: 0 20px;
+}
+.post__section.post__header__img {
+  width: 50%;
+  box-sizing: border-box;
+}
+.post__section.post__header__img img {
+  width: 50%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
 /***********************************************animation**************************************************************/
 @keyframes nav__button__hover {
   0% {

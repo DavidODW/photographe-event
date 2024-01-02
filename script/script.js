@@ -24,4 +24,28 @@ jQuery(document).ready(function($) {
     $(".burger-link, .burger__btn").on("click", function() {
         toggleNav();
     });
+    // Ouverture de la modale via le bouton contact du menu des photos 
+    var modal = $('#myModal');
+    var btnSingle = $('#post__modal__buttton');
+    var modalCloseButton = $('.modal__user__button');
+    $(document).ready(function(){
+        var post_meta_reference = custom_vars.post_meta_reference; 
+        $("#modal__user__photo").val(post_meta_reference);
+      });
+    // Ouverture de la modale via le bouton contact du menu nav
+    btnSingle.click(function() {
+        modal.css('display', 'block');
+    });
+
+    
+
+    // Fermeture de la modale via le bouton envoyer de la modale
+    modalCloseButton.click(function() {
+        modal.addClass('fade-out');
+        setTimeout(function() {
+            modal.css('display', 'none').removeClass('fade-out');
+        }, 500);
+    });
+    
 });
+
