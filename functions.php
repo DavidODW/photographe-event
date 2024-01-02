@@ -31,4 +31,5 @@ function tout_droit_reserve($items, $args) {
 
 add_filter('wp_nav_menu_items', 'tout_droit_reserve', 10, 2);
 
+
 ?>

@@ -73,7 +73,6 @@ $breakpoint__small_phone: 375px;
 }
 body{
   max-width:1440px;
-  margin: 0 auto;
 }
 h1 {
   font-family:SpaceMono ;
@@ -113,6 +112,7 @@ h3 {
   font-weight: 500;
   color: $color-black-main;
 }
+
 p{
   font-family:Poppins ;
   font-size: 0.875em;
@@ -304,10 +304,10 @@ p{
   position: fixed;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
-  animation: fallIn 1s ease-out;
+  transform: translateX(-50%);  
+  animation: fallIn 0.5s ease-out;
   &.fade-out {
-    animation: riseUp 1s ease-in;
+    animation: riseUp 0.5s ease-in;
   }
   @media screen and (max-width: $breakpoint__large_phone) {
     top: 20%;

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(function() {
             modal.style.display = "none";
             modal.classList.remove("fade-out");
-        }, 1000);
+        }, 500);
     }
 
 });
