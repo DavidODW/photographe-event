@@ -20,13 +20,15 @@ jQuery(document).ready(function($) {
             burgerLink.removeClass("burger-link-animation");
         }
     }
-
-    $(".burger-link, .burger__btn").on("click", function() {
-        toggleNav();
+    // pour faire disparaitre ou apparaitre le menu au clic 
+    $(".menu-item,.burger-link, .burger__btn").on("click", function() {
+        toggleNav(); 
     });
+
+
     // Ouverture de la modale via le bouton contact du menu des photos 
     var modal = $('#myModal');
-    var btnSingle = $('#post__modal__buttton');
+    var btnSingle = $('#post__modal__button');
     var modalCloseButton = $('.modal__user__button');
     $(document).ready(function(){
         var post_meta_reference = custom_vars.post_meta_reference; 

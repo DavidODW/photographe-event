@@ -7,20 +7,22 @@
 
         <div class="post__header__meta">
           <h1><?php the_title(); ?></h1>
-          <p>Référence : <?php $post__meta__reference = get_field('reference');echo get_field('reference'); ?> </p>
-          <p>Catégorie : <?php echo strip_tags(get_the_term_list($post->ID, 'categorie__photo')); ?></p>
-          <p>Type : <?php echo get_field('type'); ?> </p>
-          <p>Catégorie : <?php echo strip_tags(get_the_term_list($post->ID, 'format_photo')); ?></p>
+          <p>RÉFÉRENCE : <?php $post__meta__reference = get_field('reference');echo get_field('reference'); ?> </p>
+          <p>CATÉGORIE : <?php echo strip_tags(get_the_term_list($post->ID, 'categorie__photo')); ?></p>
+          <p>FORMAT : <?php echo strip_tags(get_the_term_list($post->ID, 'format_photo')); ?></p>
+          <p>TYPE : <?php echo get_field('type'); ?> </p>
           <p>ANNÉE : <?php echo get_the_date('Y'); ?> </p>     
         </div>
         <div class="post__header__img">
+          <img class="hover__icon post__img_fullscreen"src="<?php echo get_template_directory_uri(); ?>/img/icon_fullscreen.svg" alt="fullscreen icon">
           <?php the_post_thumbnail(); ?>
         </div>
       </section>
       
       <section class="post__section post__body">
         <div class="post__contact">
-          <input id="post__modal__buttton"class="post__contact__button" value="Contact" type="button">
+          <p>Cette photo vous intéresse ? </p>
+          <input id="post__modal__button"class="post__contact__button" value="Contact" type="button">
         </div>
         <div class="post__miniature">
           <div class="post__miniature__img">
@@ -36,8 +38,7 @@
                 echo '<div class="previous-post-thumbnail"><a href="' . esc_url($prev_post_permalink) . '">' . $prev_post_thumbnail . '</a></div>';
             }      
             ?>
-        </div>
-        <div class="post__browser">
+          </div> 
           <div class="post__miniature__arrow">
             <a href="<?php echo esc_url($prev_post_permalink); ?>">
             <img id="post__miniature__arrow__left" class="arrow arrow__left"src="<?php echo get_template_directory_uri(); ?>/img/left-arrow.svg" alt="fleche gauche">
@@ -45,12 +46,12 @@
             <a href="<?php echo esc_url($next_post_permalink); ?>">
             <img id="post__miniature__arrow__right" class="arrow arrow__right"src="<?php echo get_template_directory_uri(); ?>/img/right-arrow.svg" alt="fleche droite">
             </a>
-          </div>
+          </div> 
         </div>
       </section>
       
       <section class="post__section post__footer">
-        <h2>VOUS AIMEREZ AUSSI</h2>
+        <h3>VOUS AIMEREZ AUSSI</h3>
         <div class="post__suggest__img">
           <?php 
           $current_category = get_the_terms($post->ID, 'categorie__photo');
@@ -69,17 +70,9 @@
           if ($suggest_posts_query->have_posts()) {
             while ($suggest_posts_query->have_posts()) {
               $suggest_posts_query->the_post();
-              ?>
-              <div class="suggest__img__item ">
-                <div class="suggest__img__hover">
-                  <a href="<?php the_permalink(); ?>">
-                    <img class="hover__icon suggest__img_eyes"src="<?php echo get_template_directory_uri(); ?>/img/Icon_eyeicon.svg" alt="eyes icon">
-                  </a>
-                    <img class="hover__icon suggest__img_fullscreen"src="<?php echo get_template_directory_uri(); ?>/img/icon_fullscreen.svg" alt="fullscreen icon">
-                </div>
-                <?php the_post_thumbnail('large'); ?>
-              </div>
-              <?php
+
+              get_template_part('templates_part/photo_block');
+
             }
             wp_reset_postdata();
           }
