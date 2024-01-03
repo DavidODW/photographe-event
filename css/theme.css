@@ -577,6 +577,7 @@ footer {
 @media screen and (max-width: 700px) {
   .post .post__footer .post__suggest__img {
     justify-content: center;
+    flex-flow: column wrap;
   }
 }
 .post .post__footer .post__gallery_button {
@@ -596,16 +597,16 @@ footer {
 }
 .suggest__img__item .suggest__img__picture {
   display: block;
-  width: 564px;
-  height: 495px;
+  width: 29vw;
+  height: 46vh;
   margin-right: 0;
   position: relative;
   margin: 10px;
 }
 @media screen and (max-width: 700px) {
   .suggest__img__item .suggest__img__picture {
-    width: 317.66px;
-    height: 278.8px;
+    width: 80vw;
+    height: 50vh;
   }
 }
 .suggest__img__item .suggest__img__picture img {
@@ -615,14 +616,14 @@ footer {
 }
 .suggest__img__item .suggest__img__hover {
   z-index: 1;
-  width: 564px;
-  height: 495px;
+  width: 29vw;
+  height: 46vh;
   position: absolute;
 }
 @media screen and (max-width: 700px) {
   .suggest__img__item .suggest__img__hover {
-    width: 317.66px;
-    height: 278.8px;
+    width: 80vw;
+    height: 50vh;
   }
 }
 .suggest__img__item .suggest__img__hover .suggest__img_eyes {
@@ -634,7 +635,7 @@ footer {
 .suggest__img__item .suggest__img__hover .suggest__img_fullscreen {
   display: none;
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 10px;
   transition: opacity 0.3s ease;
   opacity: 0;
