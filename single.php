@@ -58,6 +58,7 @@
           $suggest_posts_query = new WP_Query(array(
             'post_type' => 'photo_pe', 
             'posts_per_page' => 2,
+            'orderby' => 'rand',
             'tax_query' => array(
               array(
                 'taxonomy' => 'categorie__photo',
@@ -78,7 +79,9 @@
           }
           ?>
         </div>
-        <input class="post__gallery_button" value="Toutes les photos" type="button">
+        <button class="post__gallery_button" value="Toutes les photos" type="button"> 
+          <a href="http://photographe-event.local/archive/" class="post__gallery_button">Toutes les photos</a>
+        </button>
       </section>
     </article>
 

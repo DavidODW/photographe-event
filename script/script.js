@@ -48,6 +48,8 @@ jQuery(document).ready(function($) {
             modal.css('display', 'none').removeClass('fade-out');
         }, 500);
     });
+
+  
     
 });
 
