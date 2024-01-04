@@ -49,7 +49,20 @@ jQuery(document).ready(function($) {
         }, 500);
     });
 
-  
+    jQuery(document).ready(function($) {
+        // Set the interval for changing the image every 10 seconds
+        setInterval(function() {
+            var currentImage = $('.pe__home__hero__picture.active');
+            var nextImage = currentImage.next('.pe__home__hero__picture');
+
+            if (nextImage.length === 0) {
+                nextImage = $('.pe__home__hero__picture:first');
+            }
+
+            currentImage.removeClass('active');
+            nextImage.addClass('active');
+        }, 10000); // 10 seconds interval
+    });
     
 });
 
