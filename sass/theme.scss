@@ -18,6 +18,11 @@ $breakpoint__small_tablet: 920px;
 $breakpoint__large_phone: 700px;
 $breakpoint__small_phone: 375px;
 
+/***********************************************environnement**************************************************************/
+$hero_header_size: 962px;/*962px*/
+
+
+
 /***********************************************fonts**************************************************************/
 /* space-mono - latin */
 @font-face {
@@ -25,7 +30,7 @@ $breakpoint__small_phone: 375px;
   font-family: 'SpaceMono';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/space-mono-v13-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/space-mono-v13-latin-regular.woff2') format('woff2'); 
 }
 /* space-mono-italic - latin */
 @font-face {
@@ -33,7 +38,7 @@ $breakpoint__small_phone: 375px;
   font-family: 'SpaceMono';
   font-style: italic;
   font-weight: 400;
-  src: url('../fonts/space-mono-v13-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/space-mono-v13-latin-italic.woff2') format('woff2'); 
 }
 /* space-mono-700 - latin */
 @font-face {
@@ -41,7 +46,7 @@ $breakpoint__small_phone: 375px;
   font-family: 'SpaceMono';
   font-style: normal;
   font-weight: 700;
-  src: url('../fonts/space-mono-v13-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/space-mono-v13-latin-700.woff2') format('woff2'); 
 }
 /* space-mono-700italic - latin */
 @font-face {
@@ -49,7 +54,7 @@ $breakpoint__small_phone: 375px;
   font-family: 'SpaceMono';
   font-style: italic;
   font-weight: 700;
-  src: url('../fonts/space-mono-v13-latin-700italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/space-mono-v13-latin-700italic.woff2') format('woff2'); 
 }
 /* poppins-300 - latin */
 @font-face {
@@ -57,7 +62,7 @@ $breakpoint__small_phone: 375px;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 300;
-  src: url('../fonts/poppins-v20-latin-300.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/poppins-v20-latin-300.woff2') format('woff2'); 
 }
 /* poppins-300italic - latin */
 @font-face {
@@ -65,7 +70,7 @@ $breakpoint__small_phone: 375px;
   font-family: 'Poppins';
   font-style: italic;
   font-weight: 300;
-  src: url('../fonts/poppins-v20-latin-300italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/poppins-v20-latin-300italic.woff2') format('woff2'); 
 }
 /***********************************************mixin**************************************************************/
 @mixin button-hover-animation {
@@ -682,10 +687,33 @@ footer{
   }
 }
 /***********************************************front page**************************************************************/
+.pe__home_tittle{
+  width: 100%;
+  height: $hero_header_size;
+  position: relative;
+  h1 {
+    z-index: 2;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; /* Optionally, center the text within the h1 */
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color:$color-white-main;
+    color: transparent;
+  }
+
+}
+.pe__home__hero{
+  background-image: url(../../../uploads/2023/12/nathalie-0-1-1024x683.webp);
+  background-size: cover;
+}
 .pe__home__hero__picture {
   width: 100%;
-  height: 962px;
+  height: $hero_header_size;
   position: relative;
+
 
   img {
     width: 100%;
@@ -694,14 +722,20 @@ footer{
   }
 
   h1 {
+    width: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center; /* Optionally, center the text within the h1 */
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color:$color-white-main;
+    color: transparent;
   }
+
 }
 /***********************************************animation**************************************************************/
+
 @keyframes nav__button__hover {
   0% {
     transform: scale(1); 

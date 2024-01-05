@@ -1,8 +1,8 @@
-jQuery(document).ready(function($) {
+jQuery(document).ready(function(jQuery) {
     function toggleNav() {
-        var myNav = $("#myNav");
-        var burgerBtn = $(".burger__btn");
-        var burgerLink = $(".burger-link");
+        var myNav = jQuery("#myNav");
+        var burgerBtn = jQuery(".burger__btn");
+        var burgerLink = jQuery(".burger-link");
 
         if (myNav.height() === 0 || myNav.height() === undefined) {
             myNav.css({
@@ -21,18 +21,18 @@ jQuery(document).ready(function($) {
         }
     }
     // pour faire disparaitre ou apparaitre le menu au clic 
-    $(".menu-item,.burger-link, .burger__btn").on("click", function() {
+    jQuery(".menu-item,.burger-link, .burger__btn").on("click", function() {
         toggleNav(); 
     });
 
 
     // Ouverture de la modale via le bouton contact du menu des photos 
-    var modal = $('#myModal');
-    var btnSingle = $('#post__modal__button');
-    var modalCloseButton = $('.modal__user__button');
-    $(document).ready(function(){
+    var modal = jQuery('#myModal');
+    var btnSingle = jQuery('#post__modal__button');
+    var modalCloseButton = jQuery('.modal__user__button');
+    jQuery(document).ready(function(){
         var post_meta_reference = custom_vars.post_meta_reference; 
-        $("#modal__user__photo").val(post_meta_reference);
+        jQuery("#modal__user__photo").val(post_meta_reference);
       });
     // Ouverture de la modale via le bouton contact du menu nav
     btnSingle.click(function() {
@@ -49,20 +49,39 @@ jQuery(document).ready(function($) {
         }, 500);
     });
 
-    jQuery(document).ready(function($) {
-        // Set the interval for changing the image every 10 seconds
-        setInterval(function() {
-            var currentImage = $('.pe__home__hero__picture.active');
-            var nextImage = currentImage.next('.pe__home__hero__picture');
-
-            if (nextImage.length === 0) {
-                nextImage = $('.pe__home__hero__picture:first');
-            }
-
-            currentImage.removeClass('active');
-            nextImage.addClass('active');
-        }, 10000); // 10 seconds interval
-    });
     
 });
+
+// changement de l'image du hero header toutes les 10 secondes
+jQuery(document).ready(function() {
+    var ajax_url = ajax_object.ajax_url;
+    var heroContainer = jQuery('#hero-container');
+    var currentImageIndex = 0;
+
+    function changeImage() {
+        jQuery.ajax({
+            url: ajax_url,
+            type: 'POST',
+            data: {
+                'action': 'get_random_images',
+            },
+            success: function(response) {
+                currentImageIndex = (currentImageIndex + 1) % response.length;
+                var newImage = jQuery('<div class="pe__home__hero__picture" style="opacity: 0;">' + response[currentImageIndex] + '</div>');
+                
+                heroContainer.html(newImage);
+                newImage.animate({ opacity: 1 }, 1000);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    setInterval(changeImage, 10000); 
+});
+
+
+
+
 
