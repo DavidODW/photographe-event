@@ -36,14 +36,43 @@ Template Name: articles photos
             <?php 
               $prev_post = get_previous_post();
               $next_post = get_next_post();
+              $current_post_id = get_the_ID();
               $prev_post_id = $prev_post ? $prev_post->ID : '';
               $next_post_id = $next_post ? $next_post->ID : '';
-              $prev_post_thumbnail = get_the_post_thumbnail($prev_post_id, 'thumbnail');
+              $next_post_thumbnail = get_the_post_thumbnail($next_post_id, 'thumbnail');
               $prev_post_permalink = get_permalink($prev_post_id);
               $next_post_permalink = get_permalink($next_post_id);
-              if ($prev_post_thumbnail) {
-                echo '<div class="previous-post-thumbnail"><a href="' . esc_url($prev_post_permalink) . '">' . $prev_post_thumbnail . '</a></div>';
-            }      
+              if ($next_post_thumbnail) {
+                echo '<div class="previous-post-thumbnail"><a href="' . esc_url($next_post_permalink) . '">' . $next_post_thumbnail . '</a></div>';
+            }  
+              // récupération du premeir et du dernier post des custom post type 'photo'
+              $all_posts = get_posts(array(
+                'post_type' => 'photo', 
+                'posts_per_page' => -1,
+                'orderby' => 'date',
+                'order' => 'ASC',
+              ));
+
+              if ($all_posts) {
+                // ID du premier post
+                $first_post_id = $all_posts[0]->ID;
+
+                // ID du dernier post
+                $last_post_id = end($all_posts)->ID;
+
+              } else {
+                echo 'Aucun post trouvé.';
+              }   
+              if ($next_post_id===$last_post_id) {
+                $next_post_id=$first_post_id;
+                $next_post_thumbnail = get_the_post_thumbnail($next_post_id, 'thumbnail');
+                $next_post_permalink = get_permalink($next_post_id);
+              }
+              if ($prev_post_id===$first_post_id) {
+                $prev_post_id=$last_post_id;
+                $prev_post_thumbnail = get_the_post_thumbnail($prev_post_id, 'thumbnail');
+                $prev_post_permalink = get_permalink($prev_post_id);
+              }
             ?>
           </div> 
           <div class="post__miniature__arrow">

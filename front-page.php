@@ -31,7 +31,7 @@ Template Name: accueil
     </div>
   </div>
     <div class="pe__home__gallery">
-
+        
     </div>
 </div>
 
