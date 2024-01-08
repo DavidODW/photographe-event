@@ -11,7 +11,7 @@ Template Name: accueil
         <?php
         $current_category = get_the_terms($post->ID, 'categorie__photo');
         $suggest_posts_query = new WP_Query(array(
-            'post_type' => 'photo_pe',
+            'post_type' => 'photo',
             'posts_per_page' => 1,
             'orderby' => 'rand',
         ));

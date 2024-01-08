@@ -60,7 +60,7 @@ function load_more_photos() {
     $posts_per_page = $_POST['posts_per_page'];
 
     $args = array(
-        'post_type' => 'photo_pe',
+        'post_type' => 'photo',
         'posts_per_page' => $posts_per_page,
         'paged' => $page,
     );
@@ -102,7 +102,7 @@ function get_random_images() {
     $random_images = array();
 
     $args = array(
-        'post_type' => 'photo_pe',
+        'post_type' => 'photo',
         'posts_per_page' => -1, 
         'orderby' => 'rand',   
     );
@@ -119,4 +119,5 @@ function get_random_images() {
 
     return $random_images;
 }
+
 ?>

@@ -12,7 +12,7 @@ get_header();
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
         $suggest_posts_query = new WP_Query(array(
-            'post_type' => 'photo_pe',
+            'post_type' => 'photo',
             'posts_per_page' => $posts_per_page,
             'paged' => $paged,
         ));
