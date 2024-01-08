@@ -6,6 +6,10 @@ function photographe_event_theme_assets() {
     wp_enqueue_script('photographe_script', get_template_directory_uri() . '/script/script.js', array('jquery'), null, true);
     wp_enqueue_script('photographe_modal', get_template_directory_uri() . '/script/modal.js', array(), null, true);
     wp_enqueue_script('photographe_lightbox', get_template_directory_uri() . '/script/lightbox.js', array('jquery'), null, true);
+    wp_enqueue_script('archives', get_template_directory_uri() . '/script/archive.js', array('jquery'), '1.0', true);
+    wp_localize_script('photographe_script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+    wp_localize_script('photographe_script', 'custom_script_vars', array('ajax_url' => admin_url('admin-ajax.php'),'nonce' => wp_create_nonce('custom-ajax-nonce'),));
+    wp_localize_script('archives', 'archivePhotoSettings', array('ajaxUrl' => admin_url('admin-ajax.php'),'postsPerPage' => 8,));
 }
 add_action('wp_enqueue_scripts', 'photographe_event_theme_assets','enqueue_jquery');
 
@@ -42,19 +46,8 @@ function post_modal_reference() {
 
 add_action('wp_enqueue_scripts', 'post_modal_reference');
 
-// permet d'afficher les photos supplémentaires des archives au clic sur le bouton
 
-    // permet de passer les variables necessaires au script archives dont le nombre de post par page pour la pagination
-function enqueue_custom_scripts() {
-    wp_enqueue_script('archives', get_template_directory_uri() . '/script/archive.js', array('jquery'), '1.0', true);
-    wp_localize_script('archives', 'archivePhotoSettings', array(
-        'ajaxUrl' => admin_url('admin-ajax.php'),
-        'postsPerPage' => 8,
-    ));
-}
-add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
-
-    // permet de charger les photos qui ne sont pas encore affichées sur la page archive
+// permet de charger les photos qui ne sont pas encore affichées sur la page archive et de l'acceuil
 function load_more_photos() {
     $page = $_POST['page'];
     $posts_per_page = $_POST['posts_per_page'];
@@ -83,7 +76,7 @@ add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 
 
 // changement de l'image du hero header par une image aleatoire 
-    // transfére un tableau avec l'adresse de la base de donnée à mon script
+    
 function theme_enqueue_scripts() {
     wp_localize_script('photographe_script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
 }
@@ -119,5 +112,68 @@ function get_random_images() {
 
     return $random_images;
 }
+
+// requéte ajax pour les filtres
+
+function custom_update_gallery() {
+    check_ajax_referer('custom-ajax-nonce', 'nonce');
+    $categorie = $_POST['categorie'];
+    $format = $_POST['format'];
+    $tri = $_POST['tri'];
+
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+        'paged' => 1,
+        'orderby' => 'date', 
+        'order' => 'ASC',
+    );
+
+    // selecteur ascendant descendant
+    if ($tri && strtolower($tri) === 'desc') {
+        $args['order'] = 'DESC';
+    } else {
+        $args['order'] = 'ASC'; 
+    }
+
+    // selecteur categorie
+    if ($categorie) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie__photo',
+            'field' => 'slug',
+            'terms' => $categorie,
+        );
+    }
+
+    // selecteur format
+    if ($format) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format_photo',
+            'field' => 'slug',
+            'terms' => $format,
+        );
+    }
+
+    $suggest_posts_query = new WP_Query($args);
+
+    if ($suggest_posts_query->have_posts()) {
+        ob_start();
+        while ($suggest_posts_query->have_posts()) {
+            $suggest_posts_query->the_post();
+            get_template_part('templates_part/photo_block');
+        }
+        wp_reset_postdata();
+        $response = ob_get_clean();
+    } else {
+        $response = '<p>No photos post to display.</p>';
+    }
+
+    echo $response;
+    die();
+}
+
+add_action('wp_ajax_custom_update_gallery', 'custom_update_gallery');
+add_action('wp_ajax_nopriv_custom_update_gallery', 'custom_update_gallery');
+
 
 ?>

@@ -49,11 +49,7 @@ jQuery(document).ready(function(jQuery) {
         }, 500);
     });
 
-    
-});
-
-// changement de l'image du hero header toutes les 10 secondes
-jQuery(document).ready(function() {
+    // changement de l'image du hero header toutes les 10 secondes
     var ajax_url = ajax_object.ajax_url;
     var heroContainer = jQuery('#hero-container');
     var currentImageIndex = 0;
@@ -79,9 +75,37 @@ jQuery(document).ready(function() {
     }
 
     setInterval(changeImage, 10000); 
+
+    // gestion des filtres
+
+    
+    jQuery('select').change(function() {
+        
+        var ajax_url = custom_script_vars.ajax_url;
+        var categorie = jQuery('select[name="categorie__photo"]').val();
+        var format = jQuery('select[name="format_photo"]').val();
+        var tri = jQuery('select[name="tri_photo"]').val();
+        console.log(tri)
+        console.log("Tri : ", tri);
+        jQuery.ajax({
+            type: 'POST',
+            url: ajax_url,
+            data: {
+                action: 'custom_update_gallery',
+                nonce: custom_script_vars.nonce,
+                categorie: categorie,
+                format: format,
+                tri: tri
+            },
+            success: function(response) {
+                jQuery('#photo-container').html(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+    
+
 });
-
-
-
-
 

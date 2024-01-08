@@ -31,7 +31,7 @@ get_header();
         ?>
     </div>
 
-    <div class="archives__button">
+    <div class="gallery__button">
         <button id="load-more-button">chargez la suite</button>
     </div>
 </div>
