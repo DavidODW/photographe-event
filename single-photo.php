@@ -45,6 +45,7 @@ Template Name: articles photos
               if ($next_post_thumbnail) {
                 echo '<div class="previous-post-thumbnail"><a href="' . esc_url($next_post_permalink) . '">' . $next_post_thumbnail . '</a></div>';
             }  
+            ////////////////////navigation infini///////////////////////////////////////////////////////////
               // récupération du premeir et du dernier post des custom post type 'photo'
               $all_posts = get_posts(array(
                 'post_type' => 'photo', 
@@ -62,7 +63,8 @@ Template Name: articles photos
 
               } else {
                 echo 'Aucun post trouvé.';
-              }   
+              }  
+              // création de boucle infini pour la navigation avec les fléches
               if ($next_post_id===$last_post_id) {
                 $next_post_id=$first_post_id;
                 $next_post_thumbnail = get_the_post_thumbnail($next_post_id, 'thumbnail');
@@ -73,6 +75,7 @@ Template Name: articles photos
                 $prev_post_thumbnail = get_the_post_thumbnail($prev_post_id, 'thumbnail');
                 $prev_post_permalink = get_permalink($prev_post_id);
               }
+              ///////////////////////////////////////////////////////////////////////////////////////////
             ?>
           </div> 
           <div class="post__miniature__arrow">
