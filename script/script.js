@@ -85,6 +85,7 @@ jQuery(document).ready(function(jQuery) {
         var categorie = jQuery('select[name="categorie__photo"]').val();
         var format = jQuery('select[name="format_photo"]').val();
         var tri = jQuery('select[name="tri_photo"]').val();
+        
         console.log(tri)
         console.log("Tri : ", tri);
         jQuery.ajax({

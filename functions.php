@@ -129,11 +129,14 @@ function custom_update_gallery() {
         'order' => 'ASC',
     );
 
-    // selecteur ascendant descendant
+
+    // selecteur tri
     if ($tri && strtolower($tri) === 'desc') {
         $args['order'] = 'DESC';
+
     } else {
-        $args['order'] = 'ASC'; 
+        $args['order'] = 'ASC';
+
     }
 
     // selecteur categorie

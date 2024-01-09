@@ -74,7 +74,7 @@ Template Name: accueil
             ?>
 
             <!--création du selecteur format-->
-            <select id="tri_photo"> <!-- Correct -->
+            <select id="tri_photo" name="tri_photo"> <!-- Correct -->
                 <option value="ASC">Ascendant</option>
                 <option value="DESC">Descendant</option>
             </select>
