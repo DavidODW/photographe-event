@@ -38,46 +38,50 @@ Template Name: accueil
 
     <div class="pe__home__gallery">
         <div class="pe__home__filter">
-            <?php
+            <div class="pe__home__filter__taxonomie">
+                <?php
 
-            // création du selecteur categorie
-            $categories = get_terms(array(
-                'taxonomy' => 'categorie__photo',
-                'hide_empty' => false,
-            ));
+                // création du selecteur categorie
+                $categories = get_terms(array(
+                    'taxonomy' => 'categorie__photo',
+                    'hide_empty' => false,
+                ));
 
-            if (!empty($categories)) {
-                echo '<select name="categorie__photo">';
-                echo '<option value="">Toutes les catégories</option>';
-                foreach ($categories as $category) {
-                    $selected = ($current_category && $current_category[0]->term_id == $category->term_id) ? 'selected' : '';
-                    echo '<option value="' . esc_attr($category->slug) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
+                if (!empty($categories)) {
+                    echo '<select class="pe__home__filter__selector" name="categorie__photo">';
+                    echo '<option value="">CATEGORIES</option>';
+                    foreach ($categories as $category) {
+                        $selected = ($current_category && $current_category[0]->term_id == $category->term_id) ? 'selected' : '';
+                        echo '<option class="selector__hover"value="' . esc_attr($category->slug) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
+                    }
+                    echo '</select>';
                 }
-                echo '</select>';
-            }
 
-            // création du selecteur format
-            $formats = get_terms(array(
-                'taxonomy' => 'format_photo',
-                'hide_empty' => false,
-            ));
+                // création du selecteur format
+                $formats = get_terms(array(
+                    'taxonomy' => 'format_photo',
+                    'hide_empty' => false,
+                ));
 
-            if (!empty($formats)) {
-                echo '<select name="format_photo">';
-                echo '<option value="">Tous les formats</option>';
-                foreach ($formats as $format) {
-                    $selected = ($current_format == $format->term_id) ? 'selected' : '';
-                    echo '<option value="' . esc_attr($format->slug) . '" ' . $selected . '>' . esc_html($format->name) . '</option>';
+                if (!empty($formats)) {
+                    echo '<select class="pe__home__filter__selector" name="format_photo">';
+                    echo '<option value="">FORMATS</option>';
+                    foreach ($formats as $format) {
+                        $selected = ($current_format == $format->term_id) ? 'selected' : '';
+                        echo '<option value="' . esc_attr($format->slug) . '" ' . $selected . '>' . esc_html($format->name) . '</option>';
+                    }
+                    echo '</select>';
                 }
-                echo '</select>';
-            }
-            ?>
-
-            <!--création du selecteur format-->
-            <select id="tri_photo" name="tri_photo"> <!-- Correct -->
-                <option value="ASC">Ascendant</option>
-                <option value="DESC">Descendant</option>
-            </select>
+                ?>
+            </div>
+            <div class="pe__home__filter__date">
+                <!--création du selecteur tri-->
+                <select class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
+                    <option value="">TRIER PAR</option>
+                    <option value="ASC">les plus anciennes </option>
+                    <option value="DESC">les plus récentes</option>
+                </select>
+            </div>
 
         </div>
 

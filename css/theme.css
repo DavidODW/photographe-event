@@ -2,6 +2,7 @@
 /***********************************************breakpoints**************************************************************/
 /***********************************************environnement**************************************************************/
 /*962px*/
+/*379px*/
 /***********************************************fonts**************************************************************/
 /* space-mono - latin */
 @font-face {
@@ -195,7 +196,7 @@ p {
     width: 100%;
     overflow-x: hidden;
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     left: 0;
     top: 110px;
     background-color: #E00000;
@@ -413,6 +414,7 @@ footer {
   align-self: flex-end;
 }
 .post__section .post__header__meta h1 {
+  text-transform: uppercase;
   font-family: SpaceMono;
   font-size: 4.125em;
   font-weight: 400;
@@ -675,6 +677,7 @@ footer {
   width: 100%;
   justify-content: center;
   padding-bottom: 45PX;
+  filter: drop-shadow(11px 11px 9px #000000);
 }
 .archives__wrapper h1 {
   text-align: center;
@@ -685,9 +688,6 @@ footer {
   display: flex;
   flex-flow: wrap row;
   justify-content: center;
-}
-.archives__wrapper .post__suggest__img .suggest__img__item {
-  filter: drop-shadow(11px 11px 9px #000000);
 }
 .archives__wrapper .gallery__button {
   display: flex;
@@ -715,19 +715,23 @@ footer {
   height: 962px;
   position: relative;
 }
+@media screen and (max-width: 700px) {
+  .pe__home_tittle {
+    height: 379px;
+  }
+}
 .pe__home_tittle h1 {
-  z-index: 2;
+  z-index: 1;
   width: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center; /* Optionally, center the text within the h1 */
+  text-align: center;
   -webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: #ffffff;
   color: transparent;
 }
-
 .pe__home__hero {
   background-image: url(../../../uploads/2023/12/nathalie-0-1-1024x683.webp);
   background-size: cover;
@@ -737,6 +741,11 @@ footer {
   width: 100%;
   height: 962px;
   position: relative;
+}
+@media screen and (max-width: 700px) {
+  .pe__home__hero__picture {
+    height: 379px;
+  }
 }
 .pe__home__hero__picture img {
   width: 100%;
@@ -770,9 +779,6 @@ footer {
   flex-flow: wrap row;
   justify-content: center;
 }
-.pe__home__gallery .post__suggest__img .suggest__img__item {
-  filter: drop-shadow(11px 11px 9px #000000);
-}
 .pe__home__gallery .gallery__button {
   display: flex;
   justify-content: center;
@@ -791,6 +797,45 @@ footer {
   animation: nav__button__hover 0.5s ease-in-out;
   background-color: #E00000;
   color: #ffffff;
+}
+.pe__home__gallery .suggest__img__item:hover {
+  filter: drop-shadow(11px 11px 9px #000000);
+}
+.pe__home__gallery .pe__home__filter {
+  padding-top: 50px;
+  padding-bottom: 25px;
+  display: flex;
+  width: 79%;
+  justify-content: space-between;
+}
+@media screen and (max-width: 700px) {
+  .pe__home__gallery .pe__home__filter {
+    flex-direction: column;
+  }
+}
+.pe__home__gallery .pe__home__filter .pe__home__filter__selector {
+  width: 260px;
+  height: 43px;
+  font-family: Poppins;
+  font-size: 1.125em;
+  font-weight: 500;
+  color: #000000;
+  border-radius: 10px;
+  border-color: #C4C4C4;
+  padding: 5px;
+}
+.pe__home__gallery .pe__home__filter .pe__home__filter__taxonomie {
+  display: flex;
+  width: 50%;
+  margin: 0;
+}
+@media screen and (max-width: 700px) {
+  .pe__home__gallery .pe__home__filter .pe__home__filter__taxonomie {
+    width: 100%;
+  }
+}
+.pe__home__gallery .pe__home__filter .pe__home__filter__date {
+  margin-right: 0;
 }
 
 /***********************************************animation**************************************************************/
