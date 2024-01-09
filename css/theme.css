@@ -840,6 +840,14 @@ footer {
 .pe__home__gallery .pe__home__filter .pe__home__filter__date {
   margin-right: 0;
 }
+@media screen and (max-width: 700px) {
+  .pe__home__gallery .pe__home__filter .pe__home__filter__date {
+    padding-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
 
 /***********************************************animation**************************************************************/
 @keyframes nav__button__hover {

@@ -787,6 +787,12 @@ footer{
     }
     .pe__home__filter__date{
       margin-right: 0;
+      @media screen and (max-width: $breakpoint__large_phone) {
+        padding-top: 20px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        }
 
     }
 
