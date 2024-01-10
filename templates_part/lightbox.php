@@ -1,5 +1,5 @@
 <div id="lightbox" class="lightbox">     
-    <span id="lightbox__close" class="lightbox__close" onclick="closeModal()">&times;</span> 
+    <span id="lightbox__close" class="lightbox__close">&times;</span> 
     <div class="lightbox__arrow">
         <span class="lightbox__arrow__left">
             <img id="lightbox__arrow__left" class="arrow" src="<?php echo get_template_directory_uri(); ?>/img/left-arrow-w.svg" alt="fleche gauche">
