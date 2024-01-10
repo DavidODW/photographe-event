@@ -87,7 +87,7 @@ Template Name: accueil
 
         <div class="post__suggest__img" id="photo-container">
             <?php
-            $posts_per_page = 8;
+            $posts_per_page = 12;
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
  

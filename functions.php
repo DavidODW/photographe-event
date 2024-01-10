@@ -123,7 +123,7 @@ function custom_update_gallery() {
 
     $args = array(
         'post_type' => 'photo',
-        'posts_per_page' => 8,
+        'posts_per_page' => 12,
         'paged' => 1,
         'orderby' => 'date', 
         'order' => 'ASC',
@@ -179,4 +179,38 @@ add_action('wp_ajax_custom_update_gallery', 'custom_update_gallery');
 add_action('wp_ajax_nopriv_custom_update_gallery', 'custom_update_gallery');
 
 
+//transfert de mon post_id pour la lightbox
+
+function get_thumbnail_by_id_callback() {
+    $post_id = $_POST['post_id'];
+    $thumbnail_url = get_the_post_thumbnail_url($post_id, 'full');
+    
+    echo '<div id="lightbox-image-container" class="lightbox-image-container">';
+    echo '<img src="' . esc_url($thumbnail_url) . '" alt="photo">';
+    echo '</div>';
+    echo '<div id="lightbox-infos-container" class="lightbox-infos-container">';
+    
+    // Get and display the reference
+    $reference = get_field('reference', $post_id);
+    if ($reference) {
+        echo '<p class="lightbox-infos-container-reference">RÉFÉRENCE : ' . esc_html($reference) . '</p>';
+    }
+
+    // Get and display the category
+    $categories = get_the_terms($post_id, 'categorie__photo');
+    if ($categories) {
+        $category_names = array_map(function($category) {
+            return $category->name;
+        }, $categories);
+        echo '<p class="lightbox-infos-container-categorie">CATÉGORIE : ' . esc_html(implode(', ', $category_names)) . '</p>';
+    }
+
+    echo '</div>';
+
+    wp_die();
+}
+
+add_action('wp_ajax_get_thumbnail_by_id', 'get_thumbnail_by_id_callback');
+add_action('wp_ajax_nopriv_get_thumbnail_by_id', 'get_thumbnail_by_id_callback');
 ?>
+
