@@ -179,24 +179,24 @@ add_action('wp_ajax_custom_update_gallery', 'custom_update_gallery');
 add_action('wp_ajax_nopriv_custom_update_gallery', 'custom_update_gallery');
 
 
-//transfert de mon post_id pour la lightbox
+// creation du corps de ma la lightbox à partir de mon post_id passage du post_id via l'image pour générer l'index pour la navigation
 
 function get_thumbnail_by_id_callback() {
     $post_id = $_POST['post_id'];
     $thumbnail_url = get_the_post_thumbnail_url($post_id, 'full');
-    
+    // bloc image
     echo '<div id="lightbox-image-container" class="lightbox-image-container">';
-    echo '<img src="' . esc_url($thumbnail_url) . '" alt="photo">';
+    echo '<img class="active" src="' . esc_url($thumbnail_url) . '" data-id-photo ="' . $post_id . '" alt="photo">';
     echo '</div>';
     echo '<div id="lightbox-infos-container" class="lightbox-infos-container">';
     
-    // Get and display the reference
+    // affichage de la référence
     $reference = get_field('reference', $post_id);
     if ($reference) {
         echo '<p class="lightbox-infos-container-reference">RÉFÉRENCE : ' . esc_html($reference) . '</p>';
     }
 
-    // Get and display the category
+    // affichage de la categorie
     $categories = get_the_terms($post_id, 'categorie__photo');
     if ($categories) {
         $category_names = array_map(function($category) {
@@ -212,5 +212,43 @@ function get_thumbnail_by_id_callback() {
 
 add_action('wp_ajax_get_thumbnail_by_id', 'get_thumbnail_by_id_callback');
 add_action('wp_ajax_nopriv_get_thumbnail_by_id', 'get_thumbnail_by_id_callback');
+
+// creation d'un tableau $post_ids contenant les ids des post type photo
+function post_photo_array() {
+    check_ajax_referer('custom-ajax-nonce', 'nonce');
+
+    $current_post_id = isset($_POST['current_post_id']) ? $_POST['current_post_id'] : 0;
+    $categories = get_the_terms($current_post_id, 'categorie__photo');
+
+    if ($categories && !is_wp_error($categories)) {
+        $category_ids = wp_list_pluck($categories, 'term_id');
+    } else {
+        $category_ids = array();
+    }
+
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => -1,
+        'orderby' => 'date',
+        'order' => 'DESC',
+    );
+
+    $query = new WP_Query($args);
+    $post_ids = array();
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $post_ids[] = get_the_ID();
+        }
+        wp_reset_postdata();
+    }
+
+    wp_send_json(array('post_ids' => $post_ids));
+}
+
+add_action('wp_ajax_get_previous_post_id', 'post_photo_array');
+add_action('wp_ajax_nopriv_get_previous_post_id', 'post_photo_array');
+
 ?>
 
