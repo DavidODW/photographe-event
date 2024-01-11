@@ -21,7 +21,7 @@ Template Name: articles photos
           <p>ANNÉE : <?php echo get_the_date('Y'); ?> </p>     
         </div>
         <div class="post__header__img">
-          <img class="hover__icon post__img_fullscreen"src="<?php echo get_template_directory_uri(); ?>/img/icon_fullscreen.svg" alt="fullscreen icon">
+          <img class="hover__icon post__img_fullscreen suggest__img_fullscreen "src="<?php echo get_template_directory_uri(); ?>/img/icon_fullscreen.svg" data-id-photo ="<?php echo get_the_id(); ?>"alt="fullscreen icon">
           <?php the_post_thumbnail(); ?>
         </div>
       </section>
