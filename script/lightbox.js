@@ -63,7 +63,7 @@ jQuery(document).ready(function() {
             url: ajax_object.ajax_url,
             type: 'POST',
             data: {
-                action: 'get_previous_post_id',
+                action: 'post_photo_array',
                 current_post_id: currentPostId,
                 nonce: nonce
             },
@@ -103,7 +103,7 @@ jQuery(document).ready(function() {
             url: ajax_object.ajax_url,
             type: 'POST',
             data: {
-                action: 'get_previous_post_id',
+                action: 'post_photo_array',
                 current_post_id: currentPostId,
                 nonce: nonce
             },

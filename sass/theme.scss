@@ -593,6 +593,7 @@ footer{
   }
   .post__footer{
     padding-top: 50px;
+    padding-bottom: 50px;
     flex-direction: column;
     @media screen and (max-width: $breakpoint__large_phone) {
       justify-content: center;
@@ -613,13 +614,6 @@ footer{
         justify-content: center;
         flex-flow: column wrap;
        }
-    }
-    .post__gallery_button{
-      width: 272px;
-      height: 50px;
-      @media screen and (max-width: $breakpoint__large_phone) {
-       display: none;
-      }
     }
 
   }

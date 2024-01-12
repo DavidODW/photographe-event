@@ -247,8 +247,8 @@ function post_photo_array() {
     wp_send_json(array('post_ids' => $post_ids));
 }
 
-add_action('wp_ajax_get_previous_post_id', 'post_photo_array');
-add_action('wp_ajax_nopriv_get_previous_post_id', 'post_photo_array');
+add_action('wp_ajax_post_photo_array', 'post_photo_array');
+add_action('wp_ajax_nopriv_post_photo_array_id', 'post_photo_array');
 
 ?>
 

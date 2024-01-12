@@ -118,9 +118,7 @@ Template Name: articles photos
           }
           ?>
         </div>
-        <button class="post__gallery_button" value="Toutes les photos" type="button"> 
-          <a href="http://photographe-event.local/archive/" class="post__gallery_button">Toutes les photos</a>
-        </button>
+
       </section>
     </article>
 

@@ -557,6 +557,7 @@ footer {
 }
 .post .post__footer {
   padding-top: 50px;
+  padding-bottom: 50px;
   flex-direction: column;
 }
 @media screen and (max-width: 700px) {
@@ -588,15 +589,6 @@ footer {
   .post .post__footer .post__suggest__img {
     justify-content: center;
     flex-flow: column wrap;
-  }
-}
-.post .post__footer .post__gallery_button {
-  width: 272px;
-  height: 50px;
-}
-@media screen and (max-width: 700px) {
-  .post .post__footer .post__gallery_button {
-    display: none;
   }
 }
 
