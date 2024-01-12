@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head></head>
-
 <?php get_header(); ?>
 
 <h1>Coucou</h1>

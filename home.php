@@ -1,3 +1,8 @@
+<?php
+/*
+Template Name: accueil
+*/
+?>
 <?php get_header(); ?>
  	<h1>Le blog de Nathalie Mota</h1>
 
