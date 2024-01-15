@@ -53,12 +53,13 @@ function load_more_photos() {
     $posts_per_page = $_POST['posts_per_page'];
     $photoIds = $_POST['post__not_in'];
     //var_dump($photoIds);
-    $posts_per_page =-1;
+    $posts_per_page =12;
     //var_dump($posts_per_page);
-
+    $total_photo_posts = wp_count_posts('photo')->publish;
+    //var_dump($total_photo_posts);
     $args = array(
         'post_type' => 'photo',
-        'posts_per_page' => $posts_per_page,
+        'posts_per_page' => -1,
         'paged' => $page,
         'post__not_in' => $photoIds
     );
@@ -67,14 +68,17 @@ function load_more_photos() {
 
     if ($query->have_posts()) {{
         $count = 0;
-        while ($query->have_posts() && $count < 12) {{
+        while ($query->have_posts() && $count < $posts_per_page) {{
             $query->the_post();
             get_template_part('templates_part/photo_block');
             $count++;
         }}
         wp_reset_postdata();
+
+
+
     }}
-    
+
     die();
 }
 

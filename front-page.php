@@ -124,7 +124,7 @@ Template Name: accueil
             if ($suggest_posts_query->have_posts()) {
                 while ($suggest_posts_query->have_posts()) {
                     $suggest_posts_query->the_post();
-                    $already_post_ids[] = get_the_ID();
+                    $post_ids[] = get_the_ID();
                     get_template_part('templates_part/photo_block');
                 }
                 wp_reset_postdata();
@@ -132,7 +132,6 @@ Template Name: accueil
                 echo '<p>No photos post to display.</p>';
             }
             ?>
-            
         </div>
 
         <div class="gallery__button">
