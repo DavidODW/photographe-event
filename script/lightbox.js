@@ -1,7 +1,8 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
     ///////////////////////observateurs d'évenements/////////////////////
         //ouverture de ma lightbox au clic sur l'icone de plein ecran des photos
-    jQuery(".suggest__img_fullscreen").click(function() {
+
+    $(document).on('click', '.suggest__img_fullscreen', function () {
         var postId = jQuery(this).data('id-photo');
         openLightbox();
         changePostContent(postId);

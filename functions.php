@@ -9,7 +9,7 @@ function photographe_event_theme_assets() {
     wp_enqueue_script('archives', get_template_directory_uri() . '/script/archive.js', array('jquery'), '1.0', true);
     wp_localize_script('photographe_script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
     wp_localize_script('photographe_script', 'custom_script_vars', array('ajax_url' => admin_url('admin-ajax.php'),'nonce' => wp_create_nonce('custom-ajax-nonce'),));
-    wp_localize_script('archives', 'archivePhotoSettings', array('ajaxUrl' => admin_url('admin-ajax.php'),'postsPerPage' => 8,));
+    wp_localize_script('archives', 'archivePhotoSettings', array('ajaxUrl' => admin_url('admin-ajax.php'),'postsPerPage' => 12,));
 }
 add_action('wp_enqueue_scripts', 'photographe_event_theme_assets','enqueue_jquery');
 
@@ -51,23 +51,30 @@ add_action('wp_enqueue_scripts', 'post_modal_reference');
 function load_more_photos() {
     $page = $_POST['page'];
     $posts_per_page = $_POST['posts_per_page'];
+    $photoIds = $_POST['post__not_in'];
+    //var_dump($photoIds);
+    $posts_per_page =-1;
+    //var_dump($posts_per_page);
 
     $args = array(
         'post_type' => 'photo',
         'posts_per_page' => $posts_per_page,
         'paged' => $page,
+        'post__not_in' => $photoIds
     );
 
     $query = new WP_Query($args);
 
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
+    if ($query->have_posts()) {{
+        $count = 0;
+        while ($query->have_posts() && $count < 12) {{
             $query->the_post();
             get_template_part('templates_part/photo_block');
-        }
+            $count++;
+        }}
         wp_reset_postdata();
-    }
-
+    }}
+    
     die();
 }
 
