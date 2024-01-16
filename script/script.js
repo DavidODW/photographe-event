@@ -1,3 +1,4 @@
+/////////////////////// gestion du menu burger///////////////////////////////////////////////////////
 jQuery(document).ready(function(jQuery) {
     function toggleNav() {
         var myNav = jQuery("#myNav");
@@ -14,7 +15,6 @@ jQuery(document).ready(function(jQuery) {
         } else {
             myNav.css({
                 height: "0",
-                opacity: "0"
             });
             burgerBtn.attr("src", "/wp-content/themes/photographe-event/img/burger-menu.svg");
             burgerLink.removeClass("burger-link-animation");
@@ -25,31 +25,66 @@ jQuery(document).ready(function(jQuery) {
         toggleNav(); 
     });
 
+});
+/////////////////////// gestion de la modale de contact///////////////////////////////////////////////////////
+jQuery(document).ready(function($) {
 
-    // Ouverture de la modale via le bouton contact du menu des photos 
-    var modal = jQuery('#myModal');
-    var btnSingle = jQuery('#post__modal__button');
-    var modalCloseButton = jQuery('.modal__user__button');
-    jQuery(document).ready(function(){
-        var post_meta_reference = custom_vars.post_meta_reference; 
-        jQuery("#modal__user__photo").val(post_meta_reference);
-      });
-    // Ouverture de la modale via le bouton contact du menu nav
-    btnSingle.click(function() {
+    function openModal(modal) {
         modal.css('display', 'block');
-    });
+    }
 
-    
-
-    // Fermeture de la modale via le bouton envoyer de la modale
-    modalCloseButton.click(function() {
+    function closeModal(modal) {
         modal.addClass('fade-out');
         setTimeout(function() {
             modal.css('display', 'none').removeClass('fade-out');
         }, 500);
+    }
+
+    // Modale pour le menu nav
+    var modalNav = $('#myModal');
+    var btnNav = $('#menu-item-31');
+    var modalCloseButtonNav = $('.modal__user__button:first');
+
+    btnNav.on('click', function(event) {
+        event.stopPropagation();
+        openModal(modalNav);
     });
 
-    // changement de l'image du hero header toutes les 10 secondes
+    modalCloseButtonNav.on('click', function(event) {
+        event.stopPropagation();
+        closeModal(modalNav);
+    });
+
+    // Modale pour le menu des photos
+    var modalPhoto = $('#myModal');
+    var btnSingle = $('#post__modal__button');
+    var modalCloseButtonPhoto = $('.modal__user__button');
+    var post_meta_reference = custom_vars.post_meta_reference;
+
+    btnSingle.click(function(event) {
+        event.stopPropagation();
+        $("#modal__user__photo").val(post_meta_reference);
+        openModal(modalPhoto);
+    });
+
+    modalCloseButtonPhoto.click(function(event) {
+        event.stopPropagation();
+        closeModal(modalPhoto);
+    });
+
+    // fermeture au clic a l'exterieur de la modale
+    $(document).on('click', function(event) {
+        if (!$(event.target).closest('.modal-content').length) {
+            closeModal(modalNav);
+            closeModal(modalPhoto);
+        }
+    });
+
+});
+
+/////////////////////// gestion de l'image aléatoire de l'heroheader///////////////////////////////////////////////////////
+jQuery(document).ready(function(jQuery) {
+    
     var ajax_url = ajax_object.ajax_url;
     var heroContainer = jQuery('#hero-container');
     var currentImageIndex = 0;
@@ -66,7 +101,7 @@ jQuery(document).ready(function(jQuery) {
                 var newImage = jQuery('<div class="pe__home__hero__picture" style="opacity: 0;">' + response[currentImageIndex] + '</div>');
                 
                 heroContainer.html(newImage);
-                newImage.animate({ opacity: 1 }, 1000);
+                newImage.animate({ opacity: 1 }, 1000);// changement de l'image du hero header toutes les 10 secondes
             },
             error: function(error) {
                 console.log(error);
@@ -75,10 +110,9 @@ jQuery(document).ready(function(jQuery) {
     }
 
     setInterval(changeImage, 10000); 
-
-    // gestion des filtres
-
-    
+});
+/////////////////////// gestion des filtres de la front-page ///////////////////////////////////////////////////////
+jQuery(document).ready(function(jQuery) {  
     jQuery('select').change(function() {
         
         var ajax_url = custom_script_vars.ajax_url;
@@ -107,6 +141,24 @@ jQuery(document).ready(function(jQuery) {
         });
     });
     
+});   
+    
+/////////////////////// gestion des miniatures de présentation des articles photos ///////////////////////////////////////////////////////
+jQuery(document).ready(function ($) {
+    
+    $('.previous-post-thumbnail, .next-post-thumbnail').hide();
 
+    // gestion de la fléche gauche
+    $('#post__miniature__arrow__left').hover(function () {
+        $('.previous-post-thumbnail').stop(true, true).fadeIn();
+    }, function () {
+        $('.previous-post-thumbnail').stop(true, true).fadeOut();
+    });
+
+    // gestion de la fléche droite
+    $('#post__miniature__arrow__right').hover(function () {
+        $('.next-post-thumbnail').stop(true, true).fadeIn();
+    }, function () {
+        $('.next-post-thumbnail').stop(true, true).fadeOut();
+    });
 });
-

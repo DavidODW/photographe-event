@@ -78,8 +78,8 @@ Template Name: accueil
                 <!--création du selecteur tri-->
                 <select class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
                     <option value="">TRIER PAR</option>
-                    <option value="ASC">les plus anciennes </option>
-                    <option value="DESC">les plus récentes</option>
+                    <option value="ASC">à partir des plus anciennes</option>
+                    <option value="DESC">à partir des plus récentes</option>
                 </select>
             </div>
 
@@ -87,7 +87,7 @@ Template Name: accueil
 
         <div class="post__suggest__img" id="photo-container">
             <?php
-            $posts_per_page = 12;
+            $posts_per_page = 8;
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
  

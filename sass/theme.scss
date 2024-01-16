@@ -184,7 +184,7 @@ p{
     display: flex;
     width: 100%;
     height: 80px;
-    justify-content: space-between;
+
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     @media screen and (max-width:$breakpoint__large_phone) {
     justify-content: space-evenly;
@@ -198,7 +198,9 @@ p{
         padding-left: 6em;
       }
     }
-
+    .main-navigation{
+      margin-right: 20px;
+    }
 
 
 /* Style du menu principal */
@@ -562,12 +564,22 @@ footer{
       .post__miniature__img{
         width: 81px;
         height: 71px;
-        margin-right: 15px;   
+        margin-right: 15px;
+        position: relative;   
         img{
           width: 100%;
           height: 100%;
           object-fit: contain;
         }
+        
+        .thumb-nav-min{
+          position: absolute;
+          z-index: 2;
+        }
+        .current-post-thumbnail{
+          z-index: 1;
+        }
+
       }
     }
     .post__miniature__arrow{
@@ -576,6 +588,7 @@ footer{
       flex-direction: row;
       margin-right: 15px; 
       padding-top: 10px;
+
       a{
         display: inline-block;
         &:hover {
@@ -583,10 +596,11 @@ footer{
           filter: drop-shadow(0 0 0.75rem $color-red-main);
         }
       }
-      .arrow{
+      .arrow {
         width: 25px;
         &:hover {
           filter: drop-shadow(0 0 0.75rem $color-red-main);
+
         }
       }
     }
@@ -617,7 +631,11 @@ footer{
     }
 
   }
+
 }
+
+
+
 /***********************************************bloc d'affichage photo**************************************************************/
 .suggest__img__item {
   display: flex;

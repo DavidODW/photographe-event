@@ -4,12 +4,11 @@ function photographe_event_theme_assets() {
     wp_enqueue_style('photographe_styles', get_stylesheet_uri(), array(), '1.0');
     wp_enqueue_style('photographe_theme', get_template_directory_uri() . '/css/theme.css', array(), '1.0');
     wp_enqueue_script('photographe_script', get_template_directory_uri() . '/script/script.js', array('jquery'), null, true);
-    wp_enqueue_script('photographe_modal', get_template_directory_uri() . '/script/modal.js', array(), null, true);
     wp_enqueue_script('photographe_lightbox', get_template_directory_uri() . '/script/lightbox.js', array('jquery'), null, true);
     wp_enqueue_script('archives', get_template_directory_uri() . '/script/archive.js', array('jquery'), '1.0', true);
     wp_localize_script('photographe_script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
     wp_localize_script('photographe_script', 'custom_script_vars', array('ajax_url' => admin_url('admin-ajax.php'),'nonce' => wp_create_nonce('custom-ajax-nonce'),));
-    wp_localize_script('archives', 'archivePhotoSettings', array('ajaxUrl' => admin_url('admin-ajax.php'),'postsPerPage' => 12,));
+    wp_localize_script('archives', 'archivePhotoSettings', array('ajaxUrl' => admin_url('admin-ajax.php'),'postsPerPage' => 8,));
 }
 add_action('wp_enqueue_scripts', 'photographe_event_theme_assets','enqueue_jquery');
 
@@ -43,7 +42,6 @@ function post_modal_reference() {
     $post_meta_reference = get_field('reference');
     wp_localize_script('jquery', 'custom_vars', array('post_meta_reference' => $post_meta_reference));
 }
-
 add_action('wp_enqueue_scripts', 'post_modal_reference');
 
 
@@ -53,7 +51,7 @@ function load_more_photos() {
     $posts_per_page = $_POST['posts_per_page'];
     $photoIds = $_POST['post__not_in'];
     //var_dump($photoIds);
-    $posts_per_page =12;
+    $posts_per_page =8;
     //var_dump($posts_per_page);
     $total_photo_posts = wp_count_posts('photo')->publish;
     //var_dump($total_photo_posts);

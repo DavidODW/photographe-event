@@ -124,7 +124,6 @@ p {
   display: flex;
   width: 100%;
   height: 80px;
-  justify-content: space-between;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   /* Style du menu principal */
 }
@@ -141,6 +140,9 @@ p {
   width: 216px;
   height: 14px;
   padding-left: 6em;
+}
+.header .main-navigation {
+  margin-right: 20px;
 }
 .header .nav__menu__wrapper .nav__menu {
   padding-top: 31px;
@@ -529,11 +531,19 @@ footer {
   width: 81px;
   height: 71px;
   margin-right: 15px;
+  position: relative;
 }
 .post .post__body .post__miniature .post__miniature__img img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+.post .post__body .post__miniature .post__miniature__img .thumb-nav-min {
+  position: absolute;
+  z-index: 2;
+}
+.post .post__body .post__miniature .post__miniature__img .current-post-thumbnail {
+  z-index: 1;
 }
 .post .post__body .post__miniature__arrow {
   display: flex;
