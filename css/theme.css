@@ -868,6 +868,11 @@ footer {
   border-color: #C4C4C4;
   padding: 5px;
 }
+@media screen and (max-width: 700px) {
+  .pe__home__gallery .pe__home__filter .pe__home__filter__selector {
+    width: 70%;
+  }
+}
 .pe__home__gallery .pe__home__filter .pe__home__filter__taxonomie {
   display: flex;
   width: 50%;
@@ -876,6 +881,9 @@ footer {
 @media screen and (max-width: 700px) {
   .pe__home__gallery .pe__home__filter .pe__home__filter__taxonomie {
     width: 100%;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 .pe__home__gallery .pe__home__filter .pe__home__filter__date {
@@ -883,7 +891,7 @@ footer {
 }
 @media screen and (max-width: 700px) {
   .pe__home__gallery .pe__home__filter .pe__home__filter__date {
-    padding-top: 20px;
+    padding-top: 10px;
     display: flex;
     width: 100%;
     justify-content: center;
