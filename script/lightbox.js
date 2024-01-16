@@ -32,7 +32,7 @@ jQuery(document).ready(function($) {
 
     
         //mise à jour de mon id et de l'image en prenant comme parametre l'id 
-    var ajax_url = ajax_object.ajax_url;
+    var ajax_url = custom_script_vars.ajax_url;
     var postContainer = jQuery('#lightbox-content');
 
     function changePostContent(postId) {
@@ -61,7 +61,7 @@ jQuery(document).ready(function($) {
         console.log('photo active')
         console.log(currentPostId)
         jQuery.ajax({
-            url: ajax_object.ajax_url,
+            url: custom_script_vars.ajax_url,
             type: 'POST',
             data: {
                 action: 'post_photo_array',
@@ -101,7 +101,7 @@ jQuery(document).ready(function($) {
         console.log('photo active')
         console.log(currentPostId)
         jQuery.ajax({
-            url: ajax_object.ajax_url,
+            url: custom_script_vars.ajax_url,
             type: 'POST',
             data: {
                 action: 'post_photo_array',

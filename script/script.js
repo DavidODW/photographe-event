@@ -85,7 +85,7 @@ jQuery(document).ready(function($) {
 /////////////////////// gestion de l'image aléatoire de l'heroheader///////////////////////////////////////////////////////
 jQuery(document).ready(function(jQuery) {
     
-    var ajax_url = ajax_object.ajax_url;
+    var ajax_url = custom_script_vars.ajax_url;
     var heroContainer = jQuery('#hero-container');
     var currentImageIndex = 0;
 
@@ -114,7 +114,6 @@ jQuery(document).ready(function(jQuery) {
 /////////////////////// gestion des filtres de la front-page ///////////////////////////////////////////////////////
 jQuery(document).ready(function(jQuery) {  
     jQuery('select').change(function() {
-        
         var ajax_url = custom_script_vars.ajax_url;
         var categorie = jQuery('select[name="categorie__photo"]').val();
         var format = jQuery('select[name="format_photo"]').val();
@@ -160,5 +159,63 @@ jQuery(document).ready(function ($) {
         $('.next-post-thumbnail').stop(true, true).fadeIn();
     }, function () {
         $('.next-post-thumbnail').stop(true, true).fadeOut();
+    });
+});
+
+/////////////////////// gestion de l'affichage des photos archives///////////////////////////////////////////////////////
+jQuery(document).ready(function ($) {
+
+    let page = 2; 
+    const postsPerPage = 8;
+    const container = $('#photo-container');
+    const loadMoreButton = $('#load-more-button');
+
+    loadMoreButton.on('click', function () {
+        photoIds = [];
+        var categorie = jQuery('select[name="categorie__photo"]').val();
+        var format = jQuery('select[name="format_photo"]').val();
+        var tri = jQuery('select[name="tri_photo"]').val();
+        jQuery('.suggest__img_fullscreen').each(function() {
+            photoIds.push($(this).data('id-photo'));
+        });
+        photoIds = photoIds.filter((id, index) => {
+            return photoIds.indexOf(id) === index;
+        });
+        console.log(photoIds);
+        const ajaxurl = custom_script_vars.ajax_url;
+        console.log(photoIds);
+        $.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: {
+                'action': 'load_more_photos',
+                'page': page,
+                'posts_per_page': postsPerPage,
+                'post__not_in' : photoIds,
+                'categorie': categorie,
+                'format': format,
+                'tri': tri
+            },
+            success: function (response) {
+                console.log(response);
+                container.append(response);
+                page++;
+
+                // Masquer le bouton si la réponse ne contient pas de nouveaux posts
+                if ($(response.trim()).find('.suggest__img_fullscreen').length === 0) {
+                    loadMoreButton.hide();
+                } else {
+                    loadMoreButton.show();
+                }
+            }
+        });
+
+    });
+
+
+    // Gestionnaire d'événements pour les changements de sélecteurs
+    jQuery('select').change(function() {
+        // Afficher le bouton
+        loadMoreButton.show();
     });
 });

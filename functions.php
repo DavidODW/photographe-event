@@ -5,20 +5,17 @@ function photographe_event_theme_assets() {
     wp_enqueue_style('photographe_theme', get_template_directory_uri() . '/css/theme.css', array(), '1.0');
     wp_enqueue_script('photographe_script', get_template_directory_uri() . '/script/script.js', array('jquery'), null, true);
     wp_enqueue_script('photographe_lightbox', get_template_directory_uri() . '/script/lightbox.js', array('jquery'), null, true);
-    wp_enqueue_script('archives', get_template_directory_uri() . '/script/archive.js', array('jquery'), '1.0', true);
-    wp_localize_script('photographe_script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
     wp_localize_script('photographe_script', 'custom_script_vars', array('ajax_url' => admin_url('admin-ajax.php'),'nonce' => wp_create_nonce('custom-ajax-nonce'),));
-    wp_localize_script('archives', 'archivePhotoSettings', array('ajaxUrl' => admin_url('admin-ajax.php'),'postsPerPage' => 8,));
 }
 add_action('wp_enqueue_scripts', 'photographe_event_theme_assets','enqueue_jquery');
 
-
+// déclaration de mon théme
 function theme_setup() {
-    add_theme_support('post-thumbnails');
+    add_theme_support('post-thumbnails');// prise en charge des images mise en avant des articles
 
-    add_theme_support('title-tag');
+    add_theme_support('title-tag');// prise en charge du titre
 
-    register_nav_menus(array(
+    register_nav_menus(array(// enregistrement de mes menus (nav et footer)
         'main-menu' => 'Menu Principal',
         'footer-menu' => 'Menu pied de page'
     ));
@@ -26,15 +23,13 @@ function theme_setup() {
 add_action('after_setup_theme', 'theme_setup');
 
 
-
+// ajout de la mention tous droits réservés dans le menu du footer
 function tout_droit_reserve($items, $args) {
     if ($args->theme_location == 'footer-menu') {
         $items .= '<li><p>TOUS DROITS RÉSERVÉS</p></li>';
     }
-
     return $items;
 }
-
 add_filter('wp_nav_menu_items', 'tout_droit_reserve', 10, 2);
 
 // Récupération de la valeur du champ reference des post image pour les convertir en variable jquery
@@ -44,38 +39,69 @@ function post_modal_reference() {
 }
 add_action('wp_enqueue_scripts', 'post_modal_reference');
 
+// fonction de création des variables pour mes requétes pour les post photo (front page)
+function build_photo_query_args($page, $posts_per_page, $photoIds, $tri, $categorie, $format) {
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => $posts_per_page,
+        'paged' => $page,
+        'orderby' => 'date', 
+        'order' => 'ASC',
+        'post__not_in' => $photoIds,
+    );
 
-// permet de charger les photos qui ne sont pas encore affichées sur la page archive et de l'acceuil
+    // Selecteur tri
+    if ($tri && strtolower($tri) === 'desc') {
+        $args['order'] = 'DESC';
+    } else {
+        $args['order'] = 'ASC';
+    }
+
+    // Selecteur categorie
+    if ($categorie) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie__photo',
+            'field' => 'slug',
+            'terms' => $categorie,
+        );
+    }
+
+    // Selecteur format
+    if ($format) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format_photo',
+            'field' => 'slug',
+            'terms' => $format,
+        );
+    }
+
+    return $args;
+}
+
+// permet de charger les photos qui ne sont pas encore affichées sur la front page (load more button)
 function load_more_photos() {
     $page = $_POST['page'];
     $posts_per_page = $_POST['posts_per_page'];
     $photoIds = $_POST['post__not_in'];
-    //var_dump($photoIds);
-    $posts_per_page =8;
-    //var_dump($posts_per_page);
-    $total_photo_posts = wp_count_posts('photo')->publish;
-    //var_dump($total_photo_posts);
-    $args = array(
-        'post_type' => 'photo',
-        'posts_per_page' => -1,
-        'paged' => $page,
-        'post__not_in' => $photoIds
-    );
+    $tri = $_POST['tri'];
+    $categorie = $_POST['categorie'];
+    $format = $_POST['format'];
 
-    $query = new WP_Query($args);
+    $args = build_photo_query_args($page, $posts_per_page, $photoIds, $tri, $categorie, $format); 
 
-    if ($query->have_posts()) {{
-        $count = 0;
-        while ($query->have_posts() && $count < $posts_per_page) {{
+    $args['paged'] = 1;
+
+    $query = new WP_Query($args); //je récupére les posts conforment à ma requéte (args) 
+  
+    if ($query->have_posts()) { //si il y a des post présent dans ma query je lance ma boucle d'affichage en utilisant mon template part photo_block 
+    
+        while ($query->have_posts()) {
             $query->the_post();
             get_template_part('templates_part/photo_block');
-            $count++;
-        }}
+            
+        }
         wp_reset_postdata();
-
-
-
-    }}
+    }
 
     die();
 }
@@ -83,31 +109,41 @@ function load_more_photos() {
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 
+// mise à jour de la gallerie de la front page selon la valeur des filtres
+
+function custom_update_gallery() {
+    check_ajax_referer('custom-ajax-nonce', 'nonce');
+    $categorie = $_POST['categorie'];
+    $format = $_POST['format'];
+    $tri = $_POST['tri'];
+
+    $args = build_photo_query_args(1, 8, array(), $tri, $categorie, $format);
+
+    $suggest_posts_query = new WP_Query($args);
+
+    if ($suggest_posts_query->have_posts()) {
+
+        while ($suggest_posts_query->have_posts()) {
+            $suggest_posts_query->the_post();
+            get_template_part('templates_part/photo_block');
+        }
+        wp_reset_postdata();
+    } else {
+        $response = '<p>No photos post to display.</p>';
+    }
+
+    echo $response;
+    die();
+}
+
+add_action('wp_ajax_custom_update_gallery', 'custom_update_gallery');
+add_action('wp_ajax_nopriv_custom_update_gallery', 'custom_update_gallery');
 
 // changement de l'image du hero header par une image aleatoire 
-    
-function theme_enqueue_scripts() {
-    wp_localize_script('photographe_script', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
-}
-
-add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
-
 function get_random_images_callback() {
-    $images = get_random_images();
-    wp_send_json($images);
-}
-
-add_action('wp_ajax_get_random_images', 'get_random_images_callback');
-add_action('wp_ajax_nopriv_get_random_images', 'get_random_images_callback');
-
-function get_random_images() {
     $random_images = array();
-
-    $args = array(
-        'post_type' => 'photo',
-        'posts_per_page' => -1, 
-        'orderby' => 'rand',   
-    );
+    $args = build_photo_query_args(1, -1, array(), 'asc', null, null);
+    $args['orderby'] = 'rand'; //je modifie orderby par rand pour obtenir une image aleatoire
 
     $query = new WP_Query($args);
 
@@ -119,73 +155,11 @@ function get_random_images() {
         wp_reset_postdata();
     }
 
-    return $random_images;
+    wp_send_json($random_images);
 }
 
-// requéte ajax pour les filtres
-
-function custom_update_gallery() {
-    check_ajax_referer('custom-ajax-nonce', 'nonce');
-    $categorie = $_POST['categorie'];
-    $format = $_POST['format'];
-    $tri = $_POST['tri'];
-
-    $args = array(
-        'post_type' => 'photo',
-        'posts_per_page' => 12,
-        'paged' => 1,
-        'orderby' => 'date', 
-        'order' => 'ASC',
-    );
-
-
-    // selecteur tri
-    if ($tri && strtolower($tri) === 'desc') {
-        $args['order'] = 'DESC';
-
-    } else {
-        $args['order'] = 'ASC';
-
-    }
-
-    // selecteur categorie
-    if ($categorie) {
-        $args['tax_query'][] = array(
-            'taxonomy' => 'categorie__photo',
-            'field' => 'slug',
-            'terms' => $categorie,
-        );
-    }
-
-    // selecteur format
-    if ($format) {
-        $args['tax_query'][] = array(
-            'taxonomy' => 'format_photo',
-            'field' => 'slug',
-            'terms' => $format,
-        );
-    }
-
-    $suggest_posts_query = new WP_Query($args);
-
-    if ($suggest_posts_query->have_posts()) {
-        ob_start();
-        while ($suggest_posts_query->have_posts()) {
-            $suggest_posts_query->the_post();
-            get_template_part('templates_part/photo_block');
-        }
-        wp_reset_postdata();
-        $response = ob_get_clean();
-    } else {
-        $response = '<p>No photos post to display.</p>';
-    }
-
-    echo $response;
-    die();
-}
-
-add_action('wp_ajax_custom_update_gallery', 'custom_update_gallery');
-add_action('wp_ajax_nopriv_custom_update_gallery', 'custom_update_gallery');
+add_action('wp_ajax_get_random_images', 'get_random_images_callback');
+add_action('wp_ajax_nopriv_get_random_images', 'get_random_images_callback');
 
 
 // creation du corps de ma la lightbox à partir de mon post_id passage du post_id via l'image pour générer l'index pour la navigation
@@ -222,7 +196,7 @@ function get_thumbnail_by_id_callback() {
 add_action('wp_ajax_get_thumbnail_by_id', 'get_thumbnail_by_id_callback');
 add_action('wp_ajax_nopriv_get_thumbnail_by_id', 'get_thumbnail_by_id_callback');
 
-// creation d'un tableau $post_ids contenant les ids des post type photo
+// creation d'un tableau $post_ids contenant les ids des post type photo pour la navigation de la light box
 function post_photo_array() {
     check_ajax_referer('custom-ajax-nonce', 'nonce');
 
@@ -253,7 +227,7 @@ function post_photo_array() {
         wp_reset_postdata();
     }
 
-    wp_send_json(array('post_ids' => $post_ids));
+    wp_send_json(array('post_ids' => $post_ids));// un tableau qui stocke les ids des post image
 }
 
 add_action('wp_ajax_post_photo_array', 'post_photo_array');
