@@ -21,6 +21,7 @@ $breakpoint__small_phone: 375px;
 /***********************************************environnement**************************************************************/
 $hero_header_size: 962px;/*962px*/
 $hero_header_size_mobile: 379px;/*379px*/
+$appear-animation-duration: 1s;
 
 
 /***********************************************fonts**************************************************************/
@@ -963,44 +964,91 @@ footer{
 }
 
 /***********************************************animation**************************************************************/
-
-@keyframes nav__button__hover {
-  0% {
-    transform: scale(1); 
+  //animation d'apparition
+  .pe__home_tittle {
+    opacity: 0; 
+    animation: fadeIn $appear-animation-duration ease-in-out forwards;
+  
   }
-  50% {
-    transform: scale(1.2); 
+  .lightbox,.suggest__img__item {
+  
+      animation: iris $appear-animation-duration ease-in-out;
   }
-  100% {
-    transform: scale(1); 
+  .post ,.header{
+  
+    animation: scrollDown $appear-animation-duration ease-in-out forwards;
   }
-}
-
-@keyframes fallIn {
- 0% {
-      top: -100%;
+  
+  
+  @keyframes nav__button__hover {
+    0% {
+      transform: scale(1); 
+    }
+    50% {
+      transform: scale(1.2); 
+    }
+    100% {
+      transform: scale(1); 
+    }
+  }
+  
+  @keyframes fallIn {
+   0% {
+        top: -100%;
+        opacity: 0;
+    }
+    50%{
+      top: 25%;
+      opacity: 0.5;
+    }
+    100% {
+        top: 50%;
+        opacity: 1;
+    }
+  }
+  
+  @keyframes riseUp {
+    0% {
+         top: 50%;
+         opacity: 1;
+     }
+     50%{
+       top: 25%;
+     }
+     100% {
+         top: -100%;
+         opacity: 0;
+     }
+   }
+  
+   @keyframes fadeIn {
+    from {
       opacity: 0;
-  }
-  50%{
-    top: 25%;
-    opacity: 0.5;
-  }
-  100% {
-      top: 50%;
+      scale: 0;
+    }
+    to {
       opacity: 1;
+      scale: 1;
+    }
   }
-}
-
-@keyframes riseUp {
-  0% {
-       top: 50%;
-       opacity: 1;
-   }
-   50%{
-     top: 25%;
-   }
-   100% {
-       top: -100%;
-       opacity: 0;
-   }
- }
+  
+  @keyframes iris {
+    0% {
+      opacity: 0;
+      clip-path: circle(0% at 50% 50%);
+    }
+    100% {
+      opacity: 1;
+      clip-path: circle(100% at 50% 50%);
+    }
+  }
+  @keyframes scrollDown {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

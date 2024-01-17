@@ -49,10 +49,10 @@ Template Name: accueil
 
                 if (!empty($categories)) {
                     echo '<select class="pe__home__filter__selector" name="categorie__photo">';
-                    echo '<option value="">CATEGORIES</option>';
+                    echo '<option  value="">CATEGORIES</option>';
                     foreach ($categories as $category) {
                         $selected = ($current_category && $current_category[0]->term_id == $category->term_id) ? 'selected' : '';
-                        echo '<option class="selector__hover"value="' . esc_attr($category->slug) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
+                        echo '<option value="' . esc_attr($category->slug) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
                     }
                     echo '</select>';
                 }
@@ -65,10 +65,10 @@ Template Name: accueil
 
                 if (!empty($formats)) {
                     echo '<select class="pe__home__filter__selector" name="format_photo">';
-                    echo '<option value="">FORMATS</option>';
+                    echo '<option  value="">FORMATS</option>';
                     foreach ($formats as $format) {
                         $selected = ($current_format == $format->term_id) ? 'selected' : '';
-                        echo '<option value="' . esc_attr($format->slug) . '" ' . $selected . '>' . esc_html($format->name) . '</option>';
+                        echo '<option  value="' . esc_attr($format->slug) . '" ' . $selected . '>' . esc_html($format->name) . '</option>';
                     }
                     echo '</select>';
                 }
@@ -77,9 +77,9 @@ Template Name: accueil
             <div class="pe__home__filter__date">
                 <!--création du selecteur tri-->
                 <select class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
-                    <option value="">TRIER PAR</option>
-                    <option value="ASC">à partir des plus anciennes</option>
-                    <option value="DESC">à partir des plus récentes</option>
+                    <option  value="">TRIER PAR</option>
+                    <option  value="ASC">à partir des plus anciennes</option>
+                    <option  value="DESC">à partir des plus récentes</option>
                 </select>
             </div>
 

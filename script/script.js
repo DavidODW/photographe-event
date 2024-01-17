@@ -140,6 +140,7 @@ jQuery(document).ready(function(jQuery) {
         });
     });
     
+    
 });   
     
 /////////////////////// gestion des miniatures de présentation des articles photos ///////////////////////////////////////////////////////
