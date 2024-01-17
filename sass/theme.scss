@@ -21,7 +21,7 @@ $breakpoint__small_phone: 375px;
 /***********************************************environnement**************************************************************/
 $hero_header_size: 962px;/*962px*/
 $hero_header_size_mobile: 379px;/*379px*/
-
+$appear-animation-duration: 1s;
 
 /***********************************************fonts**************************************************************/
 /* space-mono - latin */
@@ -444,6 +444,8 @@ footer{
   display: block;
   flex-direction: column;
   width: 82%;
+  //animation d'apparition
+  animation: scrollDown $appear-animation-duration ease-in-out forwards;
   @media screen and (max-width: $breakpoint__large_phone) {
     width: 100%;
   }
@@ -641,6 +643,8 @@ footer{
   display: flex;
   margin: 0;
   position: relative; 
+  //animation d'apparition
+  animation: iris $appear-animation-duration ease-in-out;
 }
 
 .suggest__img__picture {
@@ -742,13 +746,17 @@ footer{
 
 
 /***********************************************front page**************************************************************/
-.pe__home_tittle{
+
+
+.pe__home_tittle {
   width: 100%;
   height: $hero_header_size;
   position: relative;
+
   @media screen and (max-width: $breakpoint__large_phone) {
     height: $hero_header_size_mobile;
-    }
+  }
+
   h1 {
     z-index: 1;
     width: 100%;
@@ -756,13 +764,19 @@ footer{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center; 
+    text-align: center;
     -webkit-text-stroke-width: 3px;
-    -webkit-text-stroke-color:$color-white-main;
+    -webkit-text-stroke-color: $color-white-main;
     color: transparent;
-  }
+    
 
+  }
+  
+  //animation d'apparition
+  opacity: 0; 
+  animation: fadeIn $appear-animation-duration ease-in-out forwards;
 }
+
 .pe__home__hero{
   background-image: url(../../../uploads/2023/12/nathalie-0-1-1024x683.webp);
   background-size: cover;
@@ -924,6 +938,8 @@ footer{
   height: 100%;
   overflow: auto;
   background-color: rgba(3, 3, 3, 0.8);
+    //animation d'apparition
+    animation: iris $appear-animation-duration ease-in-out;
   .lightbox__arrow{
     position: absolute;
     top: 100%;
@@ -1054,3 +1070,35 @@ footer{
        opacity: 0;
    }
  }
+
+ @keyframes fadeIn {
+  from {
+    opacity: 0;
+    scale: 0;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes iris {
+  0% {
+    opacity: 0;
+    clip-path: circle(0% at 50% 50%);
+  }
+  100% {
+    opacity: 1;
+    clip-path: circle(100% at 50% 50%);
+  }
+}
+@keyframes scrollDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
