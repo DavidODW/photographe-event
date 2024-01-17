@@ -740,12 +740,7 @@ footer{
   }
 }
 
-/***********************************************archives*************************************************************/
-.archives__wrapper {
-  @include photo-gallery-wrapper;
-  filter: drop-shadow(11px 11px 9px #000000);
-  @include photo-hover;
-}
+
 /***********************************************front page**************************************************************/
 .pe__home_tittle{
   width: 100%;
@@ -809,20 +804,18 @@ footer{
     display: flex;
     width: 79%;
     justify-content: space-between;
+
     @media screen and (max-width: $breakpoint__large_phone) {
      flex-direction: column;
      }
 
     .pe__home__filter__selector{
-      width:260px;
-      height: 43px;
-      font-family:Poppins ;
-      font-size: 1.125em;
-      font-weight: 500;
-      color: $color-black-main;
-      border-radius: 10px;
+      width:260px !important;
+      height: 43px !important;
+      border-radius: 15px !important;
       border-color: $color-black-secondary;
-      padding: 5px;
+      padding: 5px !important;
+
       @media screen and (max-width: $breakpoint__large_phone) {
         width: 70%;
 
@@ -833,6 +826,7 @@ footer{
       display: flex;   
       width: 50%;
       margin: 0;
+      gap: 20px;
       
       @media screen and (max-width: $breakpoint__large_phone) {
         width: 100%;
@@ -862,6 +856,62 @@ footer{
     
   }
 }
+
+// changement du format des filtres navec select2
+.select2-container{
+  margin: auto !important;
+}
+.select2-container--default .select2-selection__arrow {
+  display: none; 
+}
+
+.select2-container--default .select2-selection__rendered {
+  position: relative;
+}
+
+.select2-container--default .select2-selection__rendered::after {
+  content: url(../img/chevron-down-solid.svg); 
+  padding-right: 10px;
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+}
+.select2-container--default.select2-container--open .select2-selection__rendered::after {
+  content: url(../img/chevron-up-solid.svg); 
+}
+.select2-container--default .select2-search {
+  opacity: 0; 
+}
+
+.select2-container--default .select2-selection--single {
+  height: 43px !important;
+  padding-top: 8px;
+
+  &:hover, &:focus {
+    border: #215AFF 1.3px solid;
+  }
+}
+
+.select2-results__option {
+  background-color: $color-white-main !important; 
+  color: $color-black-main !important;
+  margin-top: 0;
+
+  &:first-child {
+    margin-bottom: 30px;  
+  }
+
+  &:hover, &:focus {
+    background-color: $color-red-main !important;
+    color: $color-white-main !important; 
+    font-family: Poppins;
+    font-size: 1.125em;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+}
+
 
 /************************************************lightbox**************************************************************/
 .lightbox {

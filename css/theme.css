@@ -706,49 +706,6 @@ footer {
   color: #000000;
 }
 
-/***********************************************archives*************************************************************/
-.archives__wrapper {
-  width: 100%;
-  justify-content: center;
-  padding-bottom: 45PX;
-  filter: drop-shadow(11px 11px 9px #000000);
-}
-.archives__wrapper h1 {
-  text-align: center;
-}
-.archives__wrapper .post__suggest__img {
-  width: 100%;
-  margin: 0;
-  display: flex;
-  flex-flow: wrap row;
-  justify-content: center;
-}
-.archives__wrapper .gallery__button {
-  display: flex;
-  justify-content: center;
-}
-.archives__wrapper .gallery__button #load-more-button {
-  margin-top: 30px;
-  margin-bottom: 40px;
-  width: 272px;
-  height: 50px;
-  border: none;
-  font-family: SpaceMono;
-  font-size: 0.75em;
-  font-weight: 400;
-}
-.archives__wrapper .gallery__button #load-more-button:hover {
-  animation: nav__button__hover 0.5s ease-in-out;
-  background-color: #E00000;
-  color: #ffffff;
-}
-.archives__wrapper .suggest__img__item:hover {
-  filter: drop-shadow(11px 11px 9px #000000);
-  z-index: 1;
-  transform: scale(1.05) rotate(3deg);
-  transition: 100ms cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
 /***********************************************front page**************************************************************/
 .pe__home_tittle {
   width: 100%;
@@ -858,15 +815,11 @@ footer {
   }
 }
 .pe__home__gallery .pe__home__filter .pe__home__filter__selector {
-  width: 260px;
-  height: 43px;
-  font-family: Poppins;
-  font-size: 1.125em;
-  font-weight: 500;
-  color: #000000;
-  border-radius: 10px;
+  width: 260px !important;
+  height: 43px !important;
+  border-radius: 15px !important;
   border-color: #C4C4C4;
-  padding: 5px;
+  padding: 5px !important;
 }
 @media screen and (max-width: 700px) {
   .pe__home__gallery .pe__home__filter .pe__home__filter__selector {
@@ -877,6 +830,7 @@ footer {
   display: flex;
   width: 50%;
   margin: 0;
+  gap: 20px;
 }
 @media screen and (max-width: 700px) {
   .pe__home__gallery .pe__home__filter .pe__home__filter__taxonomie {
@@ -900,6 +854,60 @@ footer {
 .pe__home__gallery .gallery__button:hover #load-more-button {
   background-color: #000000;
   color: #ffffff;
+}
+
+.select2-container {
+  margin: auto !important;
+}
+
+.select2-container--default .select2-selection__arrow {
+  display: none;
+}
+
+.select2-container--default .select2-selection__rendered {
+  position: relative;
+}
+
+.select2-container--default .select2-selection__rendered::after {
+  content: url(../img/chevron-down-solid.svg);
+  padding-right: 10px;
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+}
+
+.select2-container--default.select2-container--open .select2-selection__rendered::after {
+  content: url(../img/chevron-up-solid.svg);
+}
+
+.select2-container--default .select2-search {
+  opacity: 0;
+}
+
+.select2-container--default .select2-selection--single {
+  height: 43px !important;
+  padding-top: 8px;
+}
+.select2-container--default .select2-selection--single:hover, .select2-container--default .select2-selection--single:focus {
+  border: #215AFF 1.3px solid;
+}
+
+.select2-results__option {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  margin-top: 0;
+}
+.select2-results__option:first-child {
+  margin-bottom: 30px;
+}
+.select2-results__option:hover, .select2-results__option:focus {
+  background-color: #E00000 !important;
+  color: #ffffff !important;
+  font-family: Poppins;
+  font-size: 1.125em;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
 /************************************************lightbox**************************************************************/

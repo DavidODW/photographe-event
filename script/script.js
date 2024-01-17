@@ -140,6 +140,7 @@ jQuery(document).ready(function(jQuery) {
         });
     });
     
+    
 });   
     
 /////////////////////// gestion des miniatures de présentation des articles photos ///////////////////////////////////////////////////////
@@ -220,3 +221,8 @@ jQuery(document).ready(function ($) {
     });
 });
 
+jQuery(document).ready(function($) {
+    $('.pe__home__filter__selector').select2({
+        theme: 'default', 
+    });
+});

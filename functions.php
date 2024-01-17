@@ -3,6 +3,8 @@ function photographe_event_theme_assets() {
     wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.6.4.min.js', array(), '3.6.4', true);
     wp_enqueue_style('photographe_styles', get_stylesheet_uri(), array(), '1.0');
     wp_enqueue_style('photographe_theme', get_template_directory_uri() . '/css/theme.css', array(), '1.0');
+    wp_enqueue_style('select2-css', get_template_directory_uri() . '/dist/css/select2.min.css', array(), '4.1');
+    wp_enqueue_script('select2-js', get_template_directory_uri() . '/dist/js/select2.min.js', array(), '4.1', true);
     wp_enqueue_script('photographe_script', get_template_directory_uri() . '/script/script.js', array('jquery'), null, true);
     wp_enqueue_script('photographe_lightbox', get_template_directory_uri() . '/script/lightbox.js', array('jquery'), null, true);
     wp_localize_script('photographe_script', 'custom_script_vars', array('ajax_url' => admin_url('admin-ajax.php'),'nonce' => wp_create_nonce('custom-ajax-nonce'),));
