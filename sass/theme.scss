@@ -444,8 +444,6 @@ footer{
   display: block;
   flex-direction: column;
   width: 82%;
-  //animation d'apparition
-  animation: scrollDown $appear-animation-duration ease-in-out forwards;
   @media screen and (max-width: $breakpoint__large_phone) {
     width: 100%;
   }
@@ -643,8 +641,7 @@ footer{
   display: flex;
   margin: 0;
   position: relative; 
-  //animation d'apparition
-  animation: iris $appear-animation-duration ease-in-out;
+
 }
 
 .suggest__img__picture {
@@ -772,9 +769,6 @@ footer{
 
   }
   
-  //animation d'apparition
-  opacity: 0; 
-  animation: fadeIn $appear-animation-duration ease-in-out forwards;
 }
 
 .pe__home__hero{
@@ -938,8 +932,7 @@ footer{
   height: 100%;
   overflow: auto;
   background-color: rgba(3, 3, 3, 0.8);
-    //animation d'apparition
-    animation: iris $appear-animation-duration ease-in-out;
+
   .lightbox__arrow{
     position: absolute;
     top: 100%;
@@ -1029,6 +1022,21 @@ footer{
 }
 
 /***********************************************animation**************************************************************/
+  //animation d'apparition
+.pe__home_tittle {
+
+  opacity: 0; 
+  animation: fadeIn $appear-animation-duration ease-in-out forwards;
+}
+.lightbox, .suggest__img__item  {
+
+    animation: iris $appear-animation-duration ease-in-out;
+}
+.post {
+
+  animation: scrollDown $appear-animation-duration ease-in-out forwards;
+}
+
 
 @keyframes nav__button__hover {
   0% {
