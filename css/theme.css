@@ -1015,7 +1015,7 @@ footer {
   animation: iris 1s ease-in-out;
 }
 
-.post {
+.post, .header {
   animation: scrollDown 1s ease-in-out forwards;
 }
 

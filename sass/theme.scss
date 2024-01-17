@@ -1024,15 +1024,15 @@ footer{
 /***********************************************animation**************************************************************/
   //animation d'apparition
 .pe__home_tittle {
-
   opacity: 0; 
   animation: fadeIn $appear-animation-duration ease-in-out forwards;
+
 }
-.lightbox, .suggest__img__item  {
+.lightbox,.suggest__img__item {
 
     animation: iris $appear-animation-duration ease-in-out;
 }
-.post {
+.post ,.header{
 
   animation: scrollDown $appear-animation-duration ease-in-out forwards;
 }
