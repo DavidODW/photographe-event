@@ -815,15 +815,19 @@ footer{
      }
 
     .pe__home__filter__selector{
-      width:260px;
-      height: 43px;
+      width:290px;//passer de 270px a 290 pour les nouveaux non de trier par
+      height: 50px;
       font-family:Poppins ;
       font-size: 1.125em;
       font-weight: 500;
       color: $color-black-main;
       border-radius: 10px;
       border-color: $color-black-secondary;
-      padding: 5px;
+      border: $color-contact-field 1.3px solid;
+      
+      &:hover,&:focus{
+        border: #215AFF 1.3px solid;
+      }
       @media screen and (max-width: $breakpoint__large_phone) {
         width: 70%;
 
@@ -831,21 +835,38 @@ footer{
 
     }
     .pe__home__filter__taxonomie{
+
       display: flex;   
-      width: 50%;
+      width: 60%;
       margin: 0;
-      
+
       @media screen and (max-width: $breakpoint__large_phone) {
         width: 100%;
         gap: 10px;
         flex-direction: column;
         justify-content: center;
+        .pe__home__filter__taxonomie__formats{
+          z-index: 4;
+        }
+        .pe__home__filter__taxonomie__categories{
+          z-index: 5;
+        }
+        .pe__home__filter__taxonomie__formats ,
+        .pe__home__filter__taxonomie__categories {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: center; /* Center the <ul> horizontally */
+        }
+    
         }
 
     }
     .pe__home__filter__date{
       margin-right: 0;
       @media screen and (max-width: $breakpoint__large_phone) {
+        z-index: 3;
         padding-top: 10px;
         display: flex;
         width: 100%;
@@ -878,25 +899,38 @@ footer{
     position: relative;
     cursor: pointer;
     z-index: 3;
-    ul{
-      background-color: $color-white-main;
-    }
+
     li {
-      
+
       padding: 10px;
       display: none;
       background-color: $color-white-main;
+      height: 20px;
+      &:not(:first-child){
+        border-left:$color-contact-field 1.3px solid;
+        border-right:$color-contact-field 1.3px solid;
+        &:hover {
+          background-color: $color-red-main;
+          color: $color-white-main;
+          text-transform: capitalize;
+        }
+      }
       &:first-child {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
         display: flex;
         justify-content: space-between;      
         text-transform: capitalize;
+
+
+      }
+      &:last-child {
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-bottom: $color-contact-field 1.3px solid;
+
       }
 
-      &:hover {
-        background-color: $color-red-main;
-        color: $color-white-main;
-        text-transform: capitalize;
-      }
     }
   }
 }
@@ -906,11 +940,14 @@ footer{
   pointer-events: none;
 }
 .selected_span_open{
+  margin: 0;
   content: url(../img/chevron-down-solid.svg);
 }
 .selected_span_close{
+  margin: 0;
   content: url(../img/chevron-up-solid.svg);
 }
+
 
 /************************************************lightbox**************************************************************/
 .lightbox {

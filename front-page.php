@@ -39,6 +39,7 @@ Template Name: accueil
     <div class="pe__home__gallery">
         <div class="pe__home__filter">
             <div class="pe__home__filter__taxonomie">
+            <div class="pe__home__filter__taxonomie__categories">
                 <?php
 
                 // création du selecteur categorie
@@ -55,9 +56,11 @@ Template Name: accueil
                         echo '<li value="' . esc_attr($category->slug) . '" ' . $selected . ' class="' . esc_attr($selected) . '">' . esc_html($category->name) . '<span> </span>'. '</li>';
                     }
                     echo '</ul>';
-                }               
-                
-
+                }
+                ?>               
+            </div>    
+            <div class="pe__home__filter__taxonomie__formats">
+                <?php
                 // création du selecteur format
                 $formats = get_terms(array(
                     'taxonomy' => 'format_photo',
@@ -77,7 +80,7 @@ Template Name: accueil
                     echo '</ul>';
                 }
                 ?>
-
+            </div>
             </div>
             <div class="pe__home__filter__date">
                 <!--création du selecteur tri-->

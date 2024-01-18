@@ -257,45 +257,64 @@ jQuery(document).ready(function($) {
         loadMoreButton.show();
     });
     
-/////////////////////// lsite déroulantes //////////////////////////////////////////////////////
+/////////////////////// listes déroulantes pour filtres //////////////////////////////////////////////////////
 function toggleListItems(listId) {
     var list = $('#' + listId);
     var items = list.find('li:not(.default-option)');
     var defaultOption = list.find('.default-option');
     var filterHiddenContent = list.find('.filter-hidden').html().trim();
+    var isListOpen = false;
 
-    items.on('click', function() {
-        var clickedItem = $(this);
-
-        // Replace the content of the default option with the clicked item's content
-        defaultOption.html(clickedItem.html());
-
-        // Hide all items except the clicked one
+    // fermeture au clic hors de la liste
+    function closeList() {
         items.hide();
+        defaultOption.find('span').removeClass('selected_span_open').addClass('selected_span_close');
+        $(document).off('click', closeList);
+    }
 
-        defaultOption.find('span').removeClass('selected_span_close').addClass('selected_span_open');
-        
-    });
-
-    defaultOption.on('click', function() {
+    defaultOption.on('click', function (event) {
+        event.stopPropagation();
         var defaultContent = defaultOption.html().trim();
-
-        // Replace the content of the default option only when both contents are different
         if (defaultContent !== filterHiddenContent) {
             defaultOption.html(filterHiddenContent);
         }
+        isListOpen = !isListOpen;
 
-        // Toggle the visibility of all items
+        // Mettre à jour la classe en fonction de isListOpen
+        defaultOption.find('span').toggleClass('selected_span_open selected_span_close');
+
+        if (isListOpen) {
+            // Si la liste est ouverte, enregistrez l'événement de fermeture
+            $(document).on('click', closeList);
+        } else {
+            defaultOption.find('span').removeClass('selected_span_close');
+            $(document).off('click', closeList);
+        }
+
+        // Toggle les éléments de la liste
         items.toggle();
+    });
 
-        // Toggle the class of the span in the first line
-        defaultOption.find('span').removeClass('selected_span_open').addClass('selected_span_close');
+    items.on('click', function () {
+        var clickedItem = $(this);
+        defaultOption.html(clickedItem.html());
+        items.hide();
+        isListOpen = false;
+
+        // Mettre à jour la classe
+        defaultOption.find('span').removeClass('selected_span_close').addClass('selected_span_open');
+
+        // Désenregistrer l'événement de fermeture car la liste est déjà fermée
+        $(document).off('click', closeList);
     });
 }
 
 toggleListItems('categories_photo');
 toggleListItems('formats_photo');
 toggleListItems('tri_photo');
+
+
+
 
 
 });
