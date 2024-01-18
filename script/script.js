@@ -139,9 +139,7 @@ jQuery(document).ready(function($) {
     const categoriesList = $('#categories_photo li');
     const formatsList = $('#formats_photo li');
     const triList = $('#tri_photo li');
-    const postsPerPage = 8;
-    const container = $('#photo-container');
-    const loadMoreButton = $('#load-more-button');
+
 
     // permet de donner le meme comportement qu'un selecteur a ma liste
     function handleListItemClick(categoryType) {
@@ -198,9 +196,13 @@ jQuery(document).ready(function($) {
  
  
 
-/////////////////////// gestion de l'affichage des photos archives///////////////////////////////////////////////////////
+    /////////////////////// gestion de l'affichage des photos archives///////////////////////////////////////////////////////
 
     let page = 2; 
+    const postsPerPage = 8;
+    const container = $('#photo-container');
+    const loadMoreButton = $('#load-more-button');
+
     loadMoreButton.on('click', function () {
         // je créais un tableau contenant les id des posts deja affiché pour permettre de les exclure 
         photoIds = [];
@@ -210,19 +212,9 @@ jQuery(document).ready(function($) {
         photoIds = photoIds.filter((id, index) => {
             return photoIds.indexOf(id) === index;
         });
-        console.log(photoIds);
+         console.log(photoIds);
         const ajaxurl = custom_script_vars.ajax_url;
         console.log(photoIds);
-        console.log('Button clicked!');
-        console.log('AJAX Data:', {
-            'action': 'load_more_photos',
-            'page': page,
-            'posts_per_page': postsPerPage,
-            'post__not_in' : photoIds,
-            'categorie': categorie,
-            'format': format,
-            'tri': tri
-        });
         $.ajax({
             type: 'POST',
             url: ajaxurl,
@@ -257,9 +249,18 @@ jQuery(document).ready(function($) {
         loadMoreButton.show();
     });
     
+
+
+
+
+
+
+});
 /////////////////////// listes déroulantes pour filtres //////////////////////////////////////////////////////
+jQuery(document).ready(function() {
+
 function toggleListItems(listId) {
-    var list = $('#' + listId);
+    var list = jQuery('#' + listId);
     var items = list.find('li:not(.default-option)');
     var defaultOption = list.find('.default-option');
     var filterHiddenContent = list.find('.filter-hidden').html().trim();
@@ -269,7 +270,7 @@ function toggleListItems(listId) {
     function closeList() {
         items.hide();
         defaultOption.find('span').removeClass('selected_span_open').addClass('selected_span_close');
-        $(document).off('click', closeList);
+        jQuery(document).off('click', closeList);
     }
 
     defaultOption.on('click', function (event) {
@@ -285,10 +286,10 @@ function toggleListItems(listId) {
 
         if (isListOpen) {
             // Si la liste est ouverte, enregistrez l'événement de fermeture
-            $(document).on('click', closeList);
+            jQuery(document).on('click', closeList);
         } else {
             defaultOption.find('span').removeClass('selected_span_close');
-            $(document).off('click', closeList);
+            jQuery(document).off('click', closeList);
         }
 
         // Toggle les éléments de la liste
@@ -296,7 +297,7 @@ function toggleListItems(listId) {
     });
 
     items.on('click', function () {
-        var clickedItem = $(this);
+        var clickedItem = jQuery(this);
         defaultOption.html(clickedItem.html());
         items.hide();
         isListOpen = false;
@@ -305,16 +306,11 @@ function toggleListItems(listId) {
         defaultOption.find('span').removeClass('selected_span_close').addClass('selected_span_open');
 
         // Désenregistrer l'événement de fermeture car la liste est déjà fermée
-        $(document).off('click', closeList);
+        jQuery(document).off('click', closeList);
     });
 }
 
 toggleListItems('categories_photo');
 toggleListItems('formats_photo');
 toggleListItems('tri_photo');
-
-
-
-
-
 });
