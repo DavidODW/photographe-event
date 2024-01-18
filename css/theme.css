@@ -902,11 +902,57 @@ footer {
   color: #ffffff;
 }
 
+.pe__home__filter {
+  display: flex;
+}
+.pe__home__filter__filter__taxonomie, .pe__home__filter__filter__date {
+  margin-right: 20px;
+}
+.pe__home__filter__selector {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  cursor: pointer;
+  z-index: 3;
+}
+.pe__home__filter__selector ul {
+  background-color: #ffffff;
+}
+.pe__home__filter__selector li {
+  padding: 10px;
+  display: none;
+  background-color: #ffffff;
+}
+.pe__home__filter__selector li:first-child {
+  display: flex;
+  justify-content: space-between;
+  text-transform: capitalize;
+}
+.pe__home__filter__selector li:hover {
+  background-color: #E00000;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+
+.filter-hidden {
+  color: transparent;
+  pointer-events: none;
+}
+
+.selected_span_open {
+  content: url(../img/chevron-down-solid.svg);
+}
+
+.selected_span_close {
+  content: url(../img/chevron-up-solid.svg);
+}
+
 /************************************************lightbox**************************************************************/
 .lightbox {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   left: 0;
   top: 0;
   width: 100%;

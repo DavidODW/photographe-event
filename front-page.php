@@ -48,10 +48,11 @@ Template Name: accueil
                 ));
                 if (!empty($categories)) {
                     echo '<ul id="categories_photo" name="categories_photo" class="pe__home__filter__selector">';
-                    echo '<li value="" class="default-option">CATEGORIES</li>';
+                    echo '<li value="" class="default-option">CATEGORIES <span class="selected_span_open"> </span></li>';
+                    echo '<li value="" class="filter-hidden">CATEGORIES <span> </span></li>';
                     foreach ($categories as $category) {
                         $selected = ($current_category && $current_category[0]->term_id == $category->term_id) ? 'selected' : '';
-                        echo '<li value="' . esc_attr($category->slug) . '" ' . $selected . ' class="' . esc_attr($selected) . '">' . esc_html($category->name) . '</li>';
+                        echo '<li value="' . esc_attr($category->slug) . '" ' . $selected . ' class="' . esc_attr($selected) . '">' . esc_html($category->name) . '<span> </span>'. '</li>';
                     }
                     echo '</ul>';
                 }               
@@ -67,10 +68,11 @@ Template Name: accueil
                 // Formats section as ul and li
                 if (!empty($formats)) {
                     echo '<ul id="formats_photo" name="formats_photo" class="pe__home__filter__selector">';
-                    echo '<li value="" class="default-option">FORMATS</li>';
+                    echo '<li value="" class="default-option">FORMATS <span class="selected_span_open"> </span></li>';
+                    echo '<li value="" class="filter-hidden">FORMATS <span> </span></li>';
                     foreach ($formats as $format) {
                         $selected = ($current_format == $format->term_id) ? 'selected' : '';
-                        echo '<li value="' . esc_attr($format->slug) . '" ' . $selected . ' class="' . esc_attr($selected) . '">' . esc_html($format->name) . '</li>';
+                        echo '<li value="' . esc_attr($format->slug) . '" ' . $selected . ' class="' . esc_attr($selected) . '">' . esc_html($format->name) . '<span> </span>'.'</li>';
                     }
                     echo '</ul>';
                 }
@@ -80,9 +82,10 @@ Template Name: accueil
             <div class="pe__home__filter__date">
                 <!--création du selecteur tri-->
                 <ul class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
-                    <li  value="">TRIER PAR</li>
-                    <li  value="ASC">à partir des plus anciennes</li>
-                    <li  value="DESC">à partir des plus récentes</li>
+                    <li  class="default-option" value="">TRIER PAR <span class="selected_span_open"> </span></li>
+                    <li  class="filter-hidden" value="">TRIER PAR <span> </span></li>
+                    <li  value="ASC">à partir des plus anciennes <span> </span></li>
+                    <li  value="DESC">à partir des plus récentes <span> </span></li>
                 </ul>
             </div>
 

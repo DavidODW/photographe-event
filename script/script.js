@@ -256,4 +256,46 @@ jQuery(document).ready(function($) {
         // Afficher le bouton
         loadMoreButton.show();
     });
+    
+/////////////////////// lsite déroulantes //////////////////////////////////////////////////////
+function toggleListItems(listId) {
+    var list = $('#' + listId);
+    var items = list.find('li:not(.default-option)');
+    var defaultOption = list.find('.default-option');
+    var filterHiddenContent = list.find('.filter-hidden').html().trim();
+
+    items.on('click', function() {
+        var clickedItem = $(this);
+
+        // Replace the content of the default option with the clicked item's content
+        defaultOption.html(clickedItem.html());
+
+        // Hide all items except the clicked one
+        items.hide();
+
+        defaultOption.find('span').removeClass('selected_span_close').addClass('selected_span_open');
+        
+    });
+
+    defaultOption.on('click', function() {
+        var defaultContent = defaultOption.html().trim();
+
+        // Replace the content of the default option only when both contents are different
+        if (defaultContent !== filterHiddenContent) {
+            defaultOption.html(filterHiddenContent);
+        }
+
+        // Toggle the visibility of all items
+        items.toggle();
+
+        // Toggle the class of the span in the first line
+        defaultOption.find('span').removeClass('selected_span_open').addClass('selected_span_close');
+    });
+}
+
+toggleListItems('categories_photo');
+toggleListItems('formats_photo');
+toggleListItems('tri_photo');
+
+
 });
