@@ -46,16 +46,16 @@ Template Name: accueil
                     'taxonomy' => 'categorie__photo',
                     'hide_empty' => false,
                 ));
-
                 if (!empty($categories)) {
-                    echo '<select class="pe__home__filter__selector" name="categorie__photo">';
-                    echo '<option  value="">CATEGORIES</option>';
+                    echo '<ul id="categories_photo" name="categories_photo" class="pe__home__filter__selector">';
+                    echo '<li value="" class="default-option">CATEGORIES</li>';
                     foreach ($categories as $category) {
                         $selected = ($current_category && $current_category[0]->term_id == $category->term_id) ? 'selected' : '';
-                        echo '<option value="' . esc_attr($category->slug) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
+                        echo '<li value="' . esc_attr($category->slug) . '" ' . $selected . ' class="' . esc_attr($selected) . '">' . esc_html($category->name) . '</li>';
                     }
-                    echo '</select>';
-                }
+                    echo '</ul>';
+                }               
+                
 
                 // création du selecteur format
                 $formats = get_terms(array(
@@ -63,24 +63,27 @@ Template Name: accueil
                     'hide_empty' => false,
                 ));
 
+         
+                // Formats section as ul and li
                 if (!empty($formats)) {
-                    echo '<select class="pe__home__filter__selector" name="format_photo">';
-                    echo '<option  value="">FORMATS</option>';
+                    echo '<ul id="formats_photo" name="formats_photo" class="pe__home__filter__selector">';
+                    echo '<li value="" class="default-option">FORMATS</li>';
                     foreach ($formats as $format) {
                         $selected = ($current_format == $format->term_id) ? 'selected' : '';
-                        echo '<option  value="' . esc_attr($format->slug) . '" ' . $selected . '>' . esc_html($format->name) . '</option>';
+                        echo '<li value="' . esc_attr($format->slug) . '" ' . $selected . ' class="' . esc_attr($selected) . '">' . esc_html($format->name) . '</li>';
                     }
-                    echo '</select>';
+                    echo '</ul>';
                 }
                 ?>
+
             </div>
             <div class="pe__home__filter__date">
                 <!--création du selecteur tri-->
-                <select class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
-                    <option  value="">TRIER PAR</option>
-                    <option  value="ASC">à partir des plus anciennes</option>
-                    <option  value="DESC">à partir des plus récentes</option>
-                </select>
+                <ul class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
+                    <li  value="">TRIER PAR</li>
+                    <li  value="ASC">à partir des plus anciennes</li>
+                    <li  value="DESC">à partir des plus récentes</li>
+                </ul>
             </div>
 
         </div>

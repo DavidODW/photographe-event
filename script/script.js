@@ -111,38 +111,7 @@ jQuery(document).ready(function(jQuery) {
 
     setInterval(changeImage, 10000); 
 });
-/////////////////////// gestion des filtres de la front-page ///////////////////////////////////////////////////////
-jQuery(document).ready(function(jQuery) {  
-    jQuery('select').change(function() {
-        var ajax_url = custom_script_vars.ajax_url;
-        var categorie = jQuery('select[name="categorie__photo"]').val();
-        var format = jQuery('select[name="format_photo"]').val();
-        var tri = jQuery('select[name="tri_photo"]').val();
-        
-        console.log(tri)
-        console.log("Tri : ", tri);
-        jQuery.ajax({
-            type: 'POST',
-            url: ajax_url,
-            data: {
-                action: 'custom_update_gallery',
-                nonce: custom_script_vars.nonce,
-                categorie: categorie,
-                format: format,
-                tri: tri
-            },
-            success: function(response) {
-                jQuery('#photo-container').html(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    });
-    
-    
-});   
-    
+     
 /////////////////////// gestion des miniatures de présentation des articles photos ///////////////////////////////////////////////////////
 jQuery(document).ready(function ($) {
     
@@ -162,20 +131,79 @@ jQuery(document).ready(function ($) {
         $('.next-post-thumbnail').stop(true, true).fadeOut();
     });
 });
-
-/////////////////////// gestion de l'affichage des photos archives///////////////////////////////////////////////////////
-jQuery(document).ready(function ($) {
-
-    let page = 2; 
+/////////////////////// gestion des filtres de la front-page ///////////////////////////////////////////////////////
+jQuery(document).ready(function($) {  
+    var categorie = '';
+    var format = '';
+    var tri = '';
+    const categoriesList = $('#categories_photo li');
+    const formatsList = $('#formats_photo li');
+    const triList = $('#tri_photo li');
     const postsPerPage = 8;
     const container = $('#photo-container');
     const loadMoreButton = $('#load-more-button');
 
+    // permet de donner le meme comportement qu'un selecteur a ma liste
+    function handleListItemClick(categoryType) {
+        return function () {
+            var category = $(this).attr('value');
+            console.log('Selected ' + categoryType + ':', category);
+
+            if (categoryType === 'categorie') {
+                categorie = category;
+            } else if (categoryType === 'format') {
+                format = category;
+            } else if (categoryType === 'tri') {
+                tri = category;
+            }
+
+            $(this).siblings().removeClass('selected'); 
+            $(this).addClass('selected');// utilise la classe selected pour trouver la ligne en cour
+
+            console.log('Selected category:', categorie);
+            console.log('Selected format:', format);
+            console.log('Selected tri:', tri);
+        };
+    }
+
+    // renvoit la value de ma ligne au clic
+    categoriesList.click(handleListItemClick('categorie'));
+
+    formatsList.click(handleListItemClick('format'));
+
+    triList.click(handleListItemClick('tri'));
+
+ $('.pe__home__filter__selector li').click(function() {
+     var ajax_url = custom_script_vars.ajax_url;
+     console.log(tri)
+     console.log("Tri : ", tri);
+     jQuery.ajax({
+         type: 'POST',
+         url: ajax_url,
+         data: {
+             action: 'custom_update_gallery',
+             nonce: custom_script_vars.nonce,
+             categorie: categorie,
+             format: format,
+             tri: tri
+         },
+         success: function(response) {
+             jQuery('#photo-container').html(response);
+         },
+         error: function(error) {
+             console.log(error);
+         }
+     });
+ });
+ 
+ 
+
+/////////////////////// gestion de l'affichage des photos archives///////////////////////////////////////////////////////
+
+    let page = 2; 
     loadMoreButton.on('click', function () {
+        // je créais un tableau contenant les id des posts deja affiché pour permettre de les exclure 
         photoIds = [];
-        var categorie = jQuery('select[name="categorie__photo"]').val();
-        var format = jQuery('select[name="format_photo"]').val();
-        var tri = jQuery('select[name="tri_photo"]').val();
         jQuery('.suggest__img_fullscreen').each(function() {
             photoIds.push($(this).data('id-photo'));
         });
@@ -185,6 +213,16 @@ jQuery(document).ready(function ($) {
         console.log(photoIds);
         const ajaxurl = custom_script_vars.ajax_url;
         console.log(photoIds);
+        console.log('Button clicked!');
+        console.log('AJAX Data:', {
+            'action': 'load_more_photos',
+            'page': page,
+            'posts_per_page': postsPerPage,
+            'post__not_in' : photoIds,
+            'categorie': categorie,
+            'format': format,
+            'tri': tri
+        });
         $.ajax({
             type: 'POST',
             url: ajaxurl,
@@ -213,11 +251,9 @@ jQuery(document).ready(function ($) {
 
     });
 
-
     // Gestionnaire d'événements pour les changements de sélecteurs
-    jQuery('select').change(function() {
+    $('.pe__home__filter__selector li').click(function() {
         // Afficher le bouton
         loadMoreButton.show();
     });
 });
-
