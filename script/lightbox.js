@@ -18,7 +18,6 @@ jQuery(document).ready(function($) {
 
     jQuery(".lightbox__arrow__left").click(function() {
         navigateToPreviousPost();
-        
     });
    ///////////////////////fonctionnement de la lightbox /////////////////////
         //ouverture de la lightbox
@@ -134,4 +133,5 @@ jQuery(document).ready(function($) {
             }}
         });
     }}
+    
 });

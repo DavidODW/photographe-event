@@ -227,11 +227,14 @@ function post_photo_array() {
         wp_reset_postdata();
     }
 
-    wp_send_json(array('post_ids' => $post_ids));// un tableau qui stocke les ids des post image
+    wp_send_json(array('post_ids' => $post_ids));
 }
 
+// Utilisez le même nom d'action pour les utilisateurs connectés et non connectés
 add_action('wp_ajax_post_photo_array', 'post_photo_array');
-add_action('wp_ajax_nopriv_post_photo_array_id', 'post_photo_array');
+add_action('wp_ajax_nopriv_post_photo_array', 'post_photo_array');
+
+
 
 ?>
 
