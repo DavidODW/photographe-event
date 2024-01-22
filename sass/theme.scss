@@ -857,7 +857,7 @@ footer{
           margin: 0;
           padding: 0;
           display: flex;
-          justify-content: center; /* Center the <ul> horizontally */
+          justify-content: center;
         }
     
         }
@@ -921,8 +921,6 @@ footer{
         display: flex;
         justify-content: space-between;      
         text-transform: capitalize;
-
-
       }
       &:last-child {
         border-bottom-right-radius: 10px;
@@ -953,7 +951,7 @@ footer{
 .lightbox {
   display: none;
   position: fixed;
-  z-index: 10;
+  z-index: 9;
   left: 0;
   top: 0;
   width: 100%;
@@ -962,18 +960,24 @@ footer{
   background-color: rgba(3, 3, 3, 0.8);
   .lightbox__arrow{
     position: absolute;
-    top: 100%;
+    top: 50%;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    z-index: 10;
     margin: 0;
+    @media screen and (max-width: $breakpoint__large_phone) {
+      top: 13%;
+    }
     span{
       width: 100%;
       font-family:SpaceMono ;
       font-size: 0.75em;
       font-weight: 400;
       color: $color-white-main; 
+      
+    
       &:hover{
         font-size: 1em;
         font-weight: 800;
@@ -983,29 +987,36 @@ footer{
       }  
     }
     .lightbox__arrow__right{
-      padding-right: 10px;
+      padding-right: 15px;
       text-align: right;
 
     }
     .lightbox__arrow__left{
-      padding-left: 10px;
+      padding-left: 15px;
       text-align: left;
     }
 
   }
   .lightbox-content{
-    margin: 15% auto;
-    padding: 20px;
-    width: 80%;
-
+    box-sizing: border-box;
+    position: relative;
+    margin: 5vh auto;
+    width: 90vw; 
+    height: 90vh; 
+    @media screen and (max-width: $breakpoint__large_phone) {
+      width: 90vw; 
+      height: 90vh; 
+    }
+    
     .lightbox-image-container{
       width: 100%;
       height: 100%; 
       margin: 0 auto;
+
       img {
         width: 100%;
         height:100%;
-        object-fit: cover;
+        object-fit: contain;
       }
 
     }
@@ -1021,12 +1032,16 @@ footer{
         font-family:Poppins ;
         font-size: 0.875 em;
         font-weight: 500;
+        @media screen and (max-width: $breakpoint__large_phone) {
+          font-size: 0.5 em;
+          filter: drop-shadow(11px 11px 9px #000000);
+          }
       }
       .lightbox-infos-container-reference{
-        margin-left: 0 ;
+        margin-left: 2% ;
       }
       .lightbox-infos-container-categorie{
-        margin-right: 0 ;
+        margin-right: 2% ;
       }
     }
   }
@@ -1057,14 +1072,18 @@ footer{
   }
   .lightbox,.suggest__img__item {
   
-      animation: iris $appear-animation-duration ease-in-out;
+    animation: iris $appear-animation-duration ease-in-out;
   }
   .post ,.header{
   
     animation: scrollDown $appear-animation-duration ease-in-out forwards;
   }
-  
-  
+
+  .active{
+    opacity: 0; 
+    animation: fadeIn $appear-animation-duration ease-in-out forwards;
+  }
+
   @keyframes nav__button__hover {
     0% {
       transform: scale(1); 
@@ -1137,3 +1156,4 @@ footer{
       transform: translateY(0);
     }
   }
+

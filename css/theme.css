@@ -900,7 +900,7 @@ footer {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center; /* Center the <ul> horizontally */
+    justify-content: center;
   }
 }
 .pe__home__gallery .pe__home__filter .pe__home__filter__date {
@@ -981,7 +981,7 @@ footer {
 .lightbox {
   display: none;
   position: fixed;
-  z-index: 10;
+  z-index: 9;
   left: 0;
   top: 0;
   width: 100%;
@@ -991,12 +991,18 @@ footer {
 }
 .lightbox .lightbox__arrow {
   position: absolute;
-  top: 100%;
+  top: 50%;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: 10;
   margin: 0;
+}
+@media screen and (max-width: 700px) {
+  .lightbox .lightbox__arrow {
+    top: 13%;
+  }
 }
 .lightbox .lightbox__arrow span {
   width: 100%;
@@ -1013,17 +1019,25 @@ footer {
   transform: scale(1.5);
 }
 .lightbox .lightbox__arrow .lightbox__arrow__right {
-  padding-right: 10px;
+  padding-right: 15px;
   text-align: right;
 }
 .lightbox .lightbox__arrow .lightbox__arrow__left {
-  padding-left: 10px;
+  padding-left: 15px;
   text-align: left;
 }
 .lightbox .lightbox-content {
-  margin: 15% auto;
-  padding: 20px;
-  width: 80%;
+  box-sizing: border-box;
+  position: relative;
+  margin: 5vh auto;
+  width: 90vw;
+  height: 90vh;
+}
+@media screen and (max-width: 700px) {
+  .lightbox .lightbox-content {
+    width: 90vw;
+    height: 90vh;
+  }
 }
 .lightbox .lightbox-content .lightbox-image-container {
   width: 100%;
@@ -1033,7 +1047,7 @@ footer {
 .lightbox .lightbox-content .lightbox-image-container img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .lightbox .lightbox-content .lightbox-infos-container {
   position: relative;
@@ -1049,11 +1063,17 @@ footer {
   font-size: 0.875 em;
   font-weight: 500;
 }
+@media screen and (max-width: 700px) {
+  .lightbox .lightbox-content .lightbox-infos-container p {
+    font-size: 0.5 em;
+    filter: drop-shadow(11px 11px 9px #000000);
+  }
+}
 .lightbox .lightbox-content .lightbox-infos-container .lightbox-infos-container-reference {
-  margin-left: 0;
+  margin-left: 2%;
 }
 .lightbox .lightbox-content .lightbox-infos-container .lightbox-infos-container-categorie {
-  margin-right: 0;
+  margin-right: 2%;
 }
 
 .lightbox__close {
@@ -1084,6 +1104,11 @@ footer {
 
 .post, .header {
   animation: scrollDown 1s ease-in-out forwards;
+}
+
+.active {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 @keyframes nav__button__hover {

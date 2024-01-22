@@ -263,7 +263,9 @@ function toggleListItems(listId) {
     var list = jQuery('#' + listId);
     var items = list.find('li:not(.default-option)');
     var defaultOption = list.find('.default-option');
-    var filterHiddenContent = list.find('.filter-hidden').html().trim();
+    var filterHiddenElement = list.find('.filter-hidden');
+    var filterHiddenContent = filterHiddenElement.length > 0 ? filterHiddenElement.html().trim() : '';
+
     var isListOpen = false;
 
     // fermeture au clic hors de la liste
