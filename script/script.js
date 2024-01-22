@@ -7,7 +7,7 @@ jQuery(document).ready(function(jQuery) {
 
         if (myNav.height() === 0 || myNav.height() === undefined) {
             myNav.css({
-                height: "100%",
+                height: "100vh",
                 opacity: "1"
             });
             burgerBtn.attr("src", "/wp-content/themes/photographe-event/img/close-icon.svg");

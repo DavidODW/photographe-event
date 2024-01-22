@@ -194,15 +194,13 @@ p {
     color: #000000;
   }
   .overlay {
-    height: 0%;
+    height: 0;
     width: 100%;
-    overflow-x: hidden;
     position: fixed;
-    z-index: 3;
+    z-index: 7;
     left: 0;
-    top: 110px;
+    top: 80px;
     background-color: #E00000;
-    overflow-x: hidden;
     transition: 1s;
     opacity: 0;
   }
@@ -216,12 +214,11 @@ p {
   .overlay .overlay-content .nav__menu__wrapper ul {
     display: flex;
     flex-direction: column;
-    font-size: 64px;
+    font-size: 4em;
   }
   .overlay .overlay-content .nav__menu__wrapper ul li a {
     padding: 8px;
     text-decoration: none;
-    font-size: 1em;
     display: block;
     transition: 0.3s;
     color: #ffffff;
