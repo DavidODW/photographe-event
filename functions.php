@@ -9,6 +9,11 @@ function photographe_event_theme_assets() {
 }
 add_action('wp_enqueue_scripts', 'photographe_event_theme_assets','enqueue_jquery');
 
+// déclaration de taille d'image personnalisé
+add_image_size( 'hero__picture', 700, 600, false) ;
+add_image_size( 'photoblock__picture', 400, 400, false) ;
+add_image_size( 'single-photo__picture', 1024, 700, false) ;
+
 // déclaration de mon théme
 function theme_setup() {
     add_theme_support('post-thumbnails');// prise en charge des images mise en avant des articles
@@ -38,6 +43,7 @@ function post_modal_reference() {
     wp_localize_script('jquery', 'custom_vars', array('post_meta_reference' => $post_meta_reference));
 }
 add_action('wp_enqueue_scripts', 'post_modal_reference');
+
 
 // fonction de création des variables pour mes requétes pour les post photo (front page)
 function build_photo_query_args($page, $posts_per_page, $photoIds, $tri, $categorie, $format) {
@@ -78,6 +84,8 @@ function build_photo_query_args($page, $posts_per_page, $photoIds, $tri, $catego
     return $args;
 }
 
+////////gallerie front-page//////////
+
 // permet de charger les photos qui ne sont pas encore affichées sur la front page (load more button)
 function load_more_photos() {
     $page = $_POST['page'];
@@ -109,6 +117,7 @@ function load_more_photos() {
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
 add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
 
+
 // mise à jour de la gallerie de la front page selon la valeur des filtres
 
 function custom_update_gallery() {
@@ -139,6 +148,8 @@ function custom_update_gallery() {
 add_action('wp_ajax_custom_update_gallery', 'custom_update_gallery');
 add_action('wp_ajax_nopriv_custom_update_gallery', 'custom_update_gallery');
 
+////////heroheader //////////
+
 // changement de l'image du hero header par une image aleatoire 
 function get_random_images_callback() {
     $random_images = array();
@@ -150,7 +161,7 @@ function get_random_images_callback() {
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
-            $random_images[] = get_the_post_thumbnail(null, 'large'); 
+            $random_images[] = get_the_post_thumbnail(null, 'hero__picture'); 
         }
         wp_reset_postdata();
     }
@@ -161,6 +172,7 @@ function get_random_images_callback() {
 add_action('wp_ajax_get_random_images', 'get_random_images_callback');
 add_action('wp_ajax_nopriv_get_random_images', 'get_random_images_callback');
 
+/////////lightbox //////////
 
 // creation du corps de ma la lightbox à partir de mon post_id passage du post_id via l'image pour générer l'index pour la navigation
 

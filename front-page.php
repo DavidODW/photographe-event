@@ -26,7 +26,7 @@ Template Name: accueil
                     $suggest_posts_query->the_post();
                     ?>
                     <div class="pe__home__hero__picture">
-                        <?php the_post_thumbnail('large'); ?>
+                        <?php the_post_thumbnail('hero__picture'); ?>
                     </div>
                     <?php
                 }
@@ -48,7 +48,7 @@ Template Name: accueil
                     'hide_empty' => false,
                 ));
                 if (!empty($categories)) {
-                    echo '<ul id="categories_photo" name="categories_photo" class="pe__home__filter__selector">';
+                    echo '<ul aria-label="category filter" id="categories_photo" name="categories_photo" class="pe__home__filter__selector">';
                     echo '<li value="" class="default-option">CATEGORIES <span class="selected_span_open"> </span></li>';
                     echo '<li value="" class="filter-hidden">CATEGORIES <span> </span></li>';
                     foreach ($categories as $category) {
@@ -70,7 +70,7 @@ Template Name: accueil
          
                 // Formats section as ul and li
                 if (!empty($formats)) {
-                    echo '<ul id="formats_photo" name="formats_photo" class="pe__home__filter__selector">';
+                    echo '<ul aria-label="format filter" id="formats_photo" name="formats_photo" class="pe__home__filter__selector">';
                     echo '<li value="" class="default-option">FORMATS <span class="selected_span_open"> </span></li>';
                     echo '<li value="" class="filter-hidden">FORMATS <span> </span></li>';
                     foreach ($formats as $format) {
@@ -84,7 +84,7 @@ Template Name: accueil
             </div>
             <div class="pe__home__filter__date">
                 <!--création du selecteur tri-->
-                <ul class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
+                <ul aria-label="date filter" class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
                     <li  class="default-option" value="">TRIER PAR <span class="selected_span_open"> </span></li>
                     <li  class="filter-hidden" value="">TRIER PAR <span> </span></li>
                     <li  value="ASC">à partir des plus anciennes <span> </span></li>
@@ -144,7 +144,7 @@ Template Name: accueil
         </div>
 
         <div class="gallery__button">
-            <button id="load-more-button">Charger plus</button>
+            <button aria-label="load more" id="load-more-button">Charger plus</button>
         </div>
     </div>
 </div>

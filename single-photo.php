@@ -22,14 +22,14 @@ Template Name: articles photos
         </div>
         <div class="post__header__img">
           <img class="hover__icon post__img_fullscreen suggest__img_fullscreen "src="<?php echo get_template_directory_uri(); ?>/img/icon_fullscreen.svg" data-id-photo ="<?php echo get_the_id(); ?>"alt="fullscreen icon">
-          <?php the_post_thumbnail(); ?>
+          <?php the_post_thumbnail('single-photo__picture'); ?>
         </div>
       </section>
       
       <section class="post__section post__body">
         <div class="post__contact">
           <p>Cette photo vous intéresse ? </p>
-          <input id="post__modal__button"class="post__contact__button" value="Contact" type="button">
+          <input aria-label="contact button" id="post__modal__button"class="post__contact__button" value="Contact" type="button">
         </div>
         <div class="post__miniature">
           <div class="post__miniature__img">
@@ -64,7 +64,7 @@ Template Name: articles photos
       </section>
       
       <section class="post__section post__footer">
-        <h3>VOUS AIMEREZ AUSSI</h3>
+        <h2>VOUS AIMEREZ AUSSI</h2>
         <div class="post__suggest__img">
           <?php 
           $current_category = get_the_terms($post->ID, 'categorie__photo');

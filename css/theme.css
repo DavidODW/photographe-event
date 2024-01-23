@@ -194,13 +194,15 @@ p {
     color: #000000;
   }
   .overlay {
-    height: 0;
+    height: 0%;
     width: 100%;
+    overflow-x: hidden;
     position: fixed;
-    z-index: 7;
+    z-index: 6;
     left: 0;
-    top: 80px;
+    top: 120px;
     background-color: #E00000;
+    overflow-x: hidden;
     transition: 1s;
     opacity: 0;
   }
@@ -214,11 +216,12 @@ p {
   .overlay .overlay-content .nav__menu__wrapper ul {
     display: flex;
     flex-direction: column;
-    font-size: 4em;
+    font-size: 64px;
   }
   .overlay .overlay-content .nav__menu__wrapper ul li a {
     padding: 8px;
     text-decoration: none;
+    font-size: 1em;
     display: block;
     transition: 0.3s;
     color: #ffffff;
@@ -276,7 +279,7 @@ footer {
 /***********************************************css modale**************************************************************/
 .modal {
   display: none;
-  z-index: 1;
+  z-index: 8;
   margin: auto;
   width: 597px;
   height: 769px;
@@ -470,7 +473,7 @@ footer {
 }
 @media screen and (max-width: 700px) {
   .post .post__body {
-    margin-top: 300px;
+    margin-top: 400px;
     border-top: #000000 1px solid;
   }
 }
@@ -572,13 +575,14 @@ footer {
     justify-content: center;
   }
 }
-.post .post__footer h3 {
+.post .post__footer h2 {
   margin-left: 0;
   justify-self: flex-start;
+  font-size: 1.125em;
   padding-bottom: 30px;
 }
 @media screen and (max-width: 700px) {
-  .post .post__footer h3 {
+  .post .post__footer h2 {
     margin: auto;
   }
 }
@@ -701,49 +705,6 @@ footer {
   font-weight: 400;
   text-decoration: none;
   color: #000000;
-}
-
-/***********************************************archives*************************************************************/
-.archives__wrapper {
-  width: 100%;
-  justify-content: center;
-  padding-bottom: 45PX;
-  filter: drop-shadow(11px 11px 9px #000000);
-}
-.archives__wrapper h1 {
-  text-align: center;
-}
-.archives__wrapper .post__suggest__img {
-  width: 100%;
-  margin: 0;
-  display: flex;
-  flex-flow: wrap row;
-  justify-content: center;
-}
-.archives__wrapper .gallery__button {
-  display: flex;
-  justify-content: center;
-}
-.archives__wrapper .gallery__button #load-more-button {
-  margin-top: 30px;
-  margin-bottom: 40px;
-  width: 272px;
-  height: 50px;
-  border: none;
-  font-family: SpaceMono;
-  font-size: 0.75em;
-  font-weight: 400;
-}
-.archives__wrapper .gallery__button #load-more-button:hover {
-  animation: nav__button__hover 0.5s ease-in-out;
-  background-color: #E00000;
-  color: #ffffff;
-}
-.archives__wrapper .suggest__img__item:hover {
-  filter: drop-shadow(11px 11px 9px #000000);
-  z-index: 1;
-  transform: scale(1.05) rotate(3deg);
-  transition: 100ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 /***********************************************front page**************************************************************/
@@ -998,7 +959,7 @@ footer {
 }
 @media screen and (max-width: 700px) {
   .lightbox .lightbox__arrow {
-    top: 13%;
+    top: 90%;
   }
 }
 .lightbox .lightbox__arrow span {
@@ -1032,8 +993,9 @@ footer {
 }
 @media screen and (max-width: 700px) {
   .lightbox .lightbox-content {
-    width: 90vw;
-    height: 90vh;
+    padding-top: 100px;
+    width: 75vw;
+    height: 75vh;
   }
 }
 .lightbox .lightbox-content .lightbox-image-container {
@@ -1099,8 +1061,8 @@ footer {
   animation: iris 1s ease-in-out;
 }
 
-.post, .header {
-  animation: scrollDown 1s ease-in-out forwards;
+header, .post {
+  animation: scrollDown 1s ease-in-out;
 }
 
 .active {
