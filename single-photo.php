@@ -22,14 +22,14 @@ Template Name: articles photos
         </div>
         <div class="post__header__img">
           <img class="hover__icon post__img_fullscreen suggest__img_fullscreen "src="<?php echo get_template_directory_uri(); ?>/img/icon_fullscreen.svg" data-id-photo ="<?php echo get_the_id(); ?>"alt="fullscreen icon">
-          <?php the_post_thumbnail(); ?>
+          <?php the_post_thumbnail('single-photo__picture'); ?>
         </div>
       </section>
       
       <section class="post__section post__body">
         <div class="post__contact">
           <p>Cette photo vous intéresse ? </p>
-          <input id="post__modal__button"class="post__contact__button" value="Contact" type="button">
+          <input aria-label="contact button" id="post__modal__button"class="post__contact__button" value="Contact" type="button">
         </div>
         <div class="post__miniature">
           <div class="post__miniature__img">
@@ -40,57 +40,31 @@ Template Name: articles photos
               $prev_post_id = $prev_post ? $prev_post->ID : '';
               $next_post_id = $next_post ? $next_post->ID : '';
               $next_post_thumbnail = get_the_post_thumbnail($next_post_id, 'thumbnail');
+              $prev_post_thumbnail = get_the_post_thumbnail($prev_post_id, 'thumbnail');
+              $curr_post_thumbnail = get_the_post_thumbnail($current_post_id, 'thumbnail');
               $prev_post_permalink = get_permalink($prev_post_id);
               $next_post_permalink = get_permalink($next_post_id);
               if ($next_post_thumbnail) {
-                echo '<div class="previous-post-thumbnail"><a href="' . esc_url($next_post_permalink) . '">' . $next_post_thumbnail . '</a></div>';
+                echo '<div class="next-post-thumbnail thumb-nav-min"><a href="' . esc_url($next_post_permalink) . '">' . $next_post_thumbnail . '</a></div>';
+                echo '<div class="previous-post-thumbnail thumb-nav-min"><a href="' . esc_url($prev_post_permalink) . '">' . $prev_post_thumbnail . '</a></div>';
+                echo '<div class="current-post-thumbnail thumb-nav-min"><a >' . $curr_post_thumbnail . '</a></div>';
             }  
-            ////////////////////navigation infini///////////////////////////////////////////////////////////
-              // récupération du premeir et du dernier post des custom post type 'photo'
-              $all_posts = get_posts(array(
-                'post_type' => 'photo', 
-                'posts_per_page' => -1,
-                'orderby' => 'date',
-                'order' => 'ASC',
-              ));
-
-              if ($all_posts) {
-                // ID du premier post
-                $first_post_id = $all_posts[0]->ID;
-
-                // ID du dernier post
-                $last_post_id = end($all_posts)->ID;
-
-              } else {
-                echo 'Aucun post trouvé.';
-              }  
-              // création de boucle infini pour la navigation avec les fléches
-              if ($next_post_id===$last_post_id) {
-                $next_post_id=$first_post_id;
-                $next_post_thumbnail = get_the_post_thumbnail($next_post_id, 'thumbnail');
-                $next_post_permalink = get_permalink($next_post_id);
-              }
-              if ($prev_post_id===$first_post_id) {
-                $prev_post_id=$last_post_id;
-                $prev_post_thumbnail = get_the_post_thumbnail($prev_post_id, 'thumbnail');
-                $prev_post_permalink = get_permalink($prev_post_id);
-              }
-              ///////////////////////////////////////////////////////////////////////////////////////////
+    
             ?>
           </div> 
           <div class="post__miniature__arrow">
             <a href="<?php echo esc_url($prev_post_permalink); ?>">
-            <img id="post__miniature__arrow__left" class="arrow arrow__left"src="<?php echo get_template_directory_uri(); ?>/img/left-arrow.svg" alt="fleche gauche">
+              <img id="post__miniature__arrow__left" class="arrow arrow__left"src="<?php echo get_template_directory_uri(); ?>/img/left-arrow.svg" alt="fleche gauche">
             </a>
             <a href="<?php echo esc_url($next_post_permalink); ?>">
-            <img id="post__miniature__arrow__right" class="arrow arrow__right"src="<?php echo get_template_directory_uri(); ?>/img/right-arrow.svg" alt="fleche droite">
+              <img id="post__miniature__arrow__right" class="arrow arrow__right"src="<?php echo get_template_directory_uri(); ?>/img/right-arrow.svg" alt="fleche droite">
             </a>
           </div> 
         </div>
       </section>
       
       <section class="post__section post__footer">
-        <h3>VOUS AIMEREZ AUSSI</h3>
+        <h2>VOUS AIMEREZ AUSSI</h2>
         <div class="post__suggest__img">
           <?php 
           $current_category = get_the_terms($post->ID, 'categorie__photo');
@@ -118,9 +92,7 @@ Template Name: articles photos
           }
           ?>
         </div>
-        <button class="post__gallery_button" value="Toutes les photos" type="button"> 
-          <a href="http://photographe-event.local/archive/" class="post__gallery_button">Toutes les photos</a>
-        </button>
+
       </section>
     </article>
 

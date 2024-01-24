@@ -26,7 +26,7 @@ Template Name: accueil
                     $suggest_posts_query->the_post();
                     ?>
                     <div class="pe__home__hero__picture">
-                        <?php the_post_thumbnail('large'); ?>
+                        <?php the_post_thumbnail('hero__picture'); ?>
                     </div>
                     <?php
                 }
@@ -39,6 +39,7 @@ Template Name: accueil
     <div class="pe__home__gallery">
         <div class="pe__home__filter">
             <div class="pe__home__filter__taxonomie">
+            <div class="pe__home__filter__taxonomie__categories">
                 <?php
 
                 // création du selecteur categorie
@@ -46,48 +47,56 @@ Template Name: accueil
                     'taxonomy' => 'categorie__photo',
                     'hide_empty' => false,
                 ));
-
                 if (!empty($categories)) {
-                    echo '<select class="pe__home__filter__selector" name="categorie__photo">';
-                    echo '<option value="">CATEGORIES</option>';
+                    echo '<ul aria-label="category filter" id="categories_photo" name="categories_photo" class="pe__home__filter__selector">';
+                    echo '<li value="" class="default-option">CATEGORIES <span class="selected_span_open"> </span></li>';
+                    echo '<li value="" class="filter-hidden">CATEGORIES <span> </span></li>';
                     foreach ($categories as $category) {
                         $selected = ($current_category && $current_category[0]->term_id == $category->term_id) ? 'selected' : '';
-                        echo '<option class="selector__hover"value="' . esc_attr($category->slug) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
+                        echo '<li value="' . esc_attr($category->slug) . '" ' . $selected . ' class="' . esc_attr($selected) . '">' . esc_html($category->name) . '<span> </span>'. '</li>';
                     }
-                    echo '</select>';
+                    echo '</ul>';
                 }
-
+                ?>               
+            </div>    
+            <div class="pe__home__filter__taxonomie__formats">
+                <?php
                 // création du selecteur format
                 $formats = get_terms(array(
                     'taxonomy' => 'format_photo',
                     'hide_empty' => false,
                 ));
 
+         
+                // Formats section as ul and li
                 if (!empty($formats)) {
-                    echo '<select class="pe__home__filter__selector" name="format_photo">';
-                    echo '<option value="">FORMATS</option>';
+                    echo '<ul aria-label="format filter" id="formats_photo" name="formats_photo" class="pe__home__filter__selector">';
+                    echo '<li value="" class="default-option">FORMATS <span class="selected_span_open"> </span></li>';
+                    echo '<li value="" class="filter-hidden">FORMATS <span> </span></li>';
                     foreach ($formats as $format) {
                         $selected = ($current_format == $format->term_id) ? 'selected' : '';
-                        echo '<option value="' . esc_attr($format->slug) . '" ' . $selected . '>' . esc_html($format->name) . '</option>';
+                        echo '<li value="' . esc_attr($format->slug) . '" ' . $selected . ' class="' . esc_attr($selected) . '">' . esc_html($format->name) . '<span> </span>'.'</li>';
                     }
-                    echo '</select>';
+                    echo '</ul>';
                 }
                 ?>
             </div>
+            </div>
             <div class="pe__home__filter__date">
                 <!--création du selecteur tri-->
-                <select class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
-                    <option value="">TRIER PAR</option>
-                    <option value="ASC">les plus anciennes </option>
-                    <option value="DESC">les plus récentes</option>
-                </select>
+                <ul aria-label="date filter" class="pe__home__filter__selector" id="tri_photo" name="tri_photo"> 
+                    <li  class="default-option" value="">TRIER PAR <span class="selected_span_open"> </span></li>
+                    <li  class="filter-hidden" value="">TRIER PAR <span> </span></li>
+                    <li  value="ASC">à partir des plus anciennes <span> </span></li>
+                    <li  value="DESC">à partir des plus récentes <span> </span></li>
+                </ul>
             </div>
 
         </div>
 
         <div class="post__suggest__img" id="photo-container">
             <?php
-            $posts_per_page = 12;
+            $posts_per_page = 8;
             $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
  
@@ -124,6 +133,7 @@ Template Name: accueil
             if ($suggest_posts_query->have_posts()) {
                 while ($suggest_posts_query->have_posts()) {
                     $suggest_posts_query->the_post();
+                    $post_ids[] = get_the_ID();
                     get_template_part('templates_part/photo_block');
                 }
                 wp_reset_postdata();
@@ -134,7 +144,7 @@ Template Name: accueil
         </div>
 
         <div class="gallery__button">
-            <button id="load-more-button">Charger plus</button>
+            <button aria-label="load more" id="load-more-button">Charger plus</button>
         </div>
     </div>
 </div>
