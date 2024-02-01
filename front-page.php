@@ -144,7 +144,7 @@ Template Name: accueil
         </div>
 
         <div class="gallery__button">
-            <button aria-label="load more" id="load-more-button">Charger plus</button>
+            <button aria-label="Charger plus" id="load-more-button">Charger plus</button>
         </div>
     </div>
 </div>
