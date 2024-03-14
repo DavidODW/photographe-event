@@ -176,7 +176,7 @@ add_action('wp_ajax_nopriv_get_random_images', 'get_random_images_callback');
 
 // creation du corps de ma la lightbox à partir de mon post_id passage du post_id via l'image pour générer l'index pour la navigation
 
-function get_thumbnail_by_id_callback() {
+function get_thumbnail_by_id() {
     $post_id = $_POST['post_id'];
     $thumbnail_url = get_the_post_thumbnail_url($post_id, 'full');
     // bloc image
